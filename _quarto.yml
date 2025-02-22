@@ -1,0 +1,35 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Bioinformatics - FISH 546"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Syllabus
+      - href: schedule.qmd
+        text: Schedule
+      - href: https://github.com/course-fish546-2023
+        text: GitHub Org
+      
+      
+  # sidebar:
+  #   style: "docked"
+  #   search: true
+  #   contents:
+  #     - section: "Syllabus"
+  #       contents:
+  #         - index.qmd
+  
+  
+format:
+  html:
+    theme:
+      dark: darkly
+      light: flatly
+    css: styles.css
+    toc: true
+
+editor: visual
+

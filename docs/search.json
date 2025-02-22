@@ -1,0 +1,492 @@
+[
+  {
+    "objectID": "assignments/01-blast.html",
+    "href": "assignments/01-blast.html",
+    "title": "NCBI Blast",
+    "section": "",
+    "text": "For the first task you will take an unknown multi-fasta file and annotate it using blast. You are welcome to do this in terminal, Rstudio, or jupyter. My recommendation, and how I will demonstrate is using Rmarkdown. Once you have have your project structured, we will download software, databases, a fasta file and run the code.\nIn your code directory create a file.\n01-blast.Rmd"
+  },
+  {
+    "objectID": "assignments/01-blast.html#joining-blast-table-with-annotation-table",
+    "href": "assignments/01-blast.html#joining-blast-table-with-annotation-table",
+    "title": "NCBI Blast",
+    "section": "Joining blast table with annotation table",
+    "text": "Joining blast table with annotation table\nAt this point we have a blast output table and annotation table both with a Uniprot accession number. Thus we can join the two tables and be able to get more functional information about thet genes.\n```{bash}\nhead -2 ../output/Ab_4-uniprot_blastx.tab\nwc -l ../output/Ab_4-uniprot_blastx.tab\n```\n```{bash}\ntr '|' '\\t' < ../output/Ab_4-uniprot_blastx.tab | head -2\n```\n```{bash}\ntr '|' '\\t' < ../output/Ab_4-uniprot_blastx.tab \\\n> ../output/Ab_4-uniprot_blastx_sep.tab\n```\n```{bash}\nhead -2 ../data/uniprot_table_r2023_01.tab\nwc -l ../data/uniprot_table_r2023_01.tab\n```\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.0     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.1     ✔ tibble    3.1.8\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\n\nlibrary(\"kableExtra\")\n\n\nAttaching package: 'kableExtra'\n\nThe following object is masked from 'package:dplyr':\n\n    group_rows\n\n\n\nbltabl <- read.csv(\"../output/Ab_4-uniprot_blastx_sep.tab\", sep = '\\t', header = FALSE)\n\n\nspgo <- read.csv(\"../data/uniprot_table_r2023_01.tab\", sep = '\\t', header = TRUE)\n\n\nstr(spgo)\n\n'data.frame':   569213 obs. of  17 variables:\n $ Entry                             : chr  \"A0A023I7E1\" \"A0A024B7W1\" \"A0A024SC78\" \"A0A024SH76\" ...\n $ Reviewed                          : chr  \"reviewed\" \"reviewed\" \"reviewed\" \"reviewed\" ...\n $ Entry.Name                        : chr  \"ENG1_RHIMI\" \"POLG_ZIKVF\" \"CUTI1_HYPJR\" \"GUX2_HYPJR\" ...\n $ Protein.names                     : chr  \"Glucan endo-1,3-beta-D-glucosidase 1 (Endo-1,3-beta-glucanase 1) (EC 3.2.1.39) (Laminarinase) (RmLam81A)\" \"Genome polyprotein [Cleaved into: Capsid protein C (Capsid protein) (Core protein); Protein prM (Precursor memb\"| __truncated__ \"Cutinase (EC 3.1.1.74)\" \"Exoglucanase 2 (EC 3.2.1.91) (1,4-beta-cellobiohydrolase) (Cellobiohydrolase 6A) (Cel6A) (Exocellobiohydrolase \"| __truncated__ ...\n $ Gene.Names                        : chr  \"ENG1 LAM81A\" \"\" \"M419DRAFT_76732\" \"cbh2 M419DRAFT_122470\" ...\n $ Organism                          : chr  \"Rhizomucor miehei\" \"Zika virus (isolate ZIKV/Human/French Polynesia/10087PF/2013) (ZIKV)\" \"Hypocrea jecorina (strain ATCC 56765 / BCRC 32924 / NRRL 11460 / Rut C-30) (Trichoderma reesei)\" \"Hypocrea jecorina (strain ATCC 56765 / BCRC 32924 / NRRL 11460 / Rut C-30) (Trichoderma reesei)\" ...\n $ Length                            : int  796 3423 248 471 478 693 333 742 2442 455 ...\n $ Gene.Ontology..molecular.function.: chr  \"glucan endo-1,3-beta-D-glucosidase activity [GO:0042973]; glucan endo-1,3-beta-glucanase activity, C-3 substitu\"| __truncated__ \"4 iron, 4 sulfur cluster binding [GO:0051539]; ATP binding [GO:0005524]; ATP hydrolysis activity [GO:0016887]; \"| __truncated__ \"cutinase activity [GO:0050525]\" \"cellulose 1,4-beta-cellobiosidase activity [GO:0016162]; cellulose binding [GO:0030248]\" ...\n $ Gene.Ontology..GO.                : chr  \"extracellular region [GO:0005576]; glucan endo-1,3-beta-D-glucosidase activity [GO:0042973]; glucan endo-1,3-be\"| __truncated__ \"extracellular region [GO:0005576]; host cell endoplasmic reticulum membrane [GO:0044167]; host cell nucleus [GO\"| __truncated__ \"extracellular region [GO:0005576]; cutinase activity [GO:0050525]\" \"extracellular region [GO:0005576]; cellulose 1,4-beta-cellobiosidase activity [GO:0016162]; cellulose binding [\"| __truncated__ ...\n $ Gene.Ontology..biological.process.: chr  \"cell wall organization [GO:0071555]; polysaccharide catabolic process [GO:0000272]\" \"clathrin-dependent endocytosis of virus by host cell [GO:0075512]; fusion of virus membrane with host endosome \"| __truncated__ \"\" \"cellulose catabolic process [GO:0030245]\" ...\n $ Gene.Ontology..cellular.component.: chr  \"extracellular region [GO:0005576]\" \"extracellular region [GO:0005576]; host cell endoplasmic reticulum membrane [GO:0044167]; host cell nucleus [GO\"| __truncated__ \"extracellular region [GO:0005576]\" \"extracellular region [GO:0005576]\" ...\n $ Gene.Ontology.IDs                 : chr  \"GO:0000272; GO:0005576; GO:0042973; GO:0052861; GO:0052862; GO:0071555\" \"GO:0003724; GO:0003725; GO:0003968; GO:0004252; GO:0004482; GO:0004483; GO:0005198; GO:0005524; GO:0005525; GO:\"| __truncated__ \"GO:0005576; GO:0050525\" \"GO:0005576; GO:0016162; GO:0030245; GO:0030248\" ...\n $ Interacts.with                    : chr  \"\" \"\" \"\" \"\" ...\n $ EC.number                         : chr  \"3.2.1.39\" \"2.1.1.56; 2.1.1.57; 2.7.7.48; 3.4.21.91; 3.6.1.15; 3.6.4.13\" \"3.1.1.74\" \"3.2.1.91\" ...\n $ Reactome                          : chr  \"\" \"\" \"\" \"\" ...\n $ UniPathway                        : chr  \"\" \"\" \"\" \"\" ...\n $ InterPro                          : chr  \"IPR005200;IPR040720;IPR040451;\" \"IPR011492;IPR043502;IPR000069;IPR038302;IPR013755;IPR001122;IPR037172;IPR027287;IPR026470;IPR038345;IPR001157;I\"| __truncated__ \"IPR029058;IPR000675;IPR043580;IPR043579;IPR011150;\" \"IPR016288;IPR036434;IPR035971;IPR000254;IPR001524;\" ...\n\n\n\nkbl(\nhead(\n  left_join(bltabl, spgo,  by = c(\"V3\" = \"Entry\")) %>%\n  select(V1, V3, V13, Protein.names, Organism, Gene.Ontology..biological.process., Gene.Ontology.IDs) %>% mutate(V1 = str_replace_all(V1, \n            pattern = \"solid0078_20110412_FRAG_BC_WHITE_WHITE_F3_QV_SE_trimmed\", replacement = \"Ab\"))\n)\n) %>%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\"))\n\n\n\n \n  \n    V1 \n    V3 \n    V13 \n    Protein.names \n    Organism \n    Gene.Ontology..biological.process. \n    Gene.Ontology.IDs \n  \n \n\n  \n    Ab_contig_3 \n    O42248 \n    0 \n    Guanine nucleotide-binding protein subunit beta-2-like 1 (Receptor of activated protein kinase C) (RACK) \n    Danio rerio (Zebrafish) (Brachydanio rerio) \n    angiogenesis [GO:0001525]; convergent extension involved in gastrulation [GO:0060027]; negative regulation of Wnt signaling pathway [GO:0030178]; positive regulation of gastrulation [GO:2000543]; positive regulation of protein phosphorylation [GO:0001934]; regulation of cell division [GO:0051302]; regulation of establishment of cell polarity [GO:2000114]; regulation of protein localization [GO:0032880]; rescue of stalled ribosome [GO:0072344] \n    GO:0001525; GO:0001934; GO:0005080; GO:0005634; GO:0005737; GO:0005829; GO:0005840; GO:0030178; GO:0032880; GO:0043022; GO:0045182; GO:0051302; GO:0060027; GO:0072344; GO:1990904; GO:2000114; GO:2000543 \n  \n  \n    Ab_contig_5 \n    Q08013 \n    0 \n    Translocon-associated protein subunit gamma (TRAP-gamma) (Signal sequence receptor subunit gamma) (SSR-gamma) \n    Rattus norvegicus (Rat) \n    SRP-dependent cotranslational protein targeting to membrane [GO:0006614] \n    GO:0005783; GO:0005784; GO:0006614 \n  \n  \n    Ab_contig_6 \n    P12234 \n    0 \n    Phosphate carrier protein, mitochondrial (Phosphate transport protein) (PTP) (Solute carrier family 25 member 3) \n    Bos taurus (Bovine) \n    mitochondrial phosphate ion transmembrane transport [GO:1990547]; phosphate ion transmembrane transport [GO:0035435] \n    GO:0005315; GO:0005739; GO:0005743; GO:0015293; GO:0035435; GO:0044877; GO:1990547 \n  \n  \n    Ab_contig_9 \n    Q41629 \n    0 \n    ADP,ATP carrier protein 1, mitochondrial (ADP/ATP translocase 1) (Adenine nucleotide translocator 1) (ANT 1) \n    Triticum aestivum (Wheat) \n    mitochondrial ADP transmembrane transport [GO:0140021]; mitochondrial ATP transmembrane transport [GO:1990544] \n    GO:0005471; GO:0005743; GO:0140021; GO:1990544 \n  \n  \n    Ab_contig_13 \n    Q32NG4 \n    0 \n    Glutamine amidotransferase-like class 1 domain-containing protein 1 (Parkinson disease 7 domain-containing protein 1) \n    Xenopus laevis (African clawed frog) \n     \n    GO:0005576 \n  \n  \n    Ab_contig_23 \n    Q9GNE2 \n    0 \n    60S ribosomal protein L23 (AeRpL17A) (L17A) \n    Aedes aegypti (Yellowfever mosquito) (Culex aegypti) \n    translation [GO:0006412] \n    GO:0003735; GO:0005840; GO:0006412; GO:1990904 \n  \n\n\n\n\n\n\nleft_join(bltabl, spgo,  by = c(\"V3\" = \"Entry\")) %>%\n  select(V1, V3, V13, Protein.names, Organism, Gene.Ontology..biological.process., Gene.Ontology.IDs) %>% mutate(V1 = str_replace_all(V1, \n            pattern = \"solid0078_20110412_FRAG_BC_WHITE_WHITE_F3_QV_SE_trimmed\", replacement = \"Ab\")) %>%\n  write_delim(\"../output/blast_annot_go.tab\", delim = '\\t')"
+  },
+  {
+    "objectID": "assignments/08-bedtools.html",
+    "href": "assignments/08-bedtools.html",
+    "title": "BEDtools",
+    "section": "",
+    "text": "Assignment\n\n\n\nRun some basic sub-commands in BEDtools."
+  },
+  {
+    "objectID": "assignments/08-bedtools.html#convert-bam-to-bed",
+    "href": "assignments/08-bedtools.html#convert-bam-to-bed",
+    "title": "BEDtools",
+    "section": "Convert bam to bed",
+    "text": "Convert bam to bed\n/home/shared/bedtools2/bin/bedtools bamtobed \\ \n-i ../data/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam \\ \n> ../output/08-19F.bed\n\n\n\n\n\n\nWarning\n\n\n\nThis is big file. What should you not do with it?"
+  },
+  {
+    "objectID": "assignments/08-bedtools.html#get-coverage-of-sequence-reads-on-gene-regions",
+    "href": "assignments/08-bedtools.html#get-coverage-of-sequence-reads-on-gene-regions",
+    "title": "BEDtools",
+    "section": "Get coverage of sequence reads on gene regions",
+    "text": "Get coverage of sequence reads on gene regions"
+  },
+  {
+    "objectID": "assignments/08-bedtools.html#default-behavior",
+    "href": "assignments/08-bedtools.html#default-behavior",
+    "title": "BEDtools",
+    "section": "Default behavior",
+    "text": "Default behavior\nAfter each interval in A, bedtools coverage will report:\n\nThe number of features in B that overlapped (by at least one base pair) the A interval.\nThe number of bases in A that had non-zero coverage from features in B.\nThe length of the entry in A.\nThe fraction of bases in A that had non-zero coverage from features in B.\n\n/home/shared/bedtools2/bin/bedtools coverage \\\n-a ../data/C_virginica-3.0_Gnomon_genes.bed \\\n-b ../output/08-19F.bed \\\n> ../output/08-gene-19F-coverage.out"
+  },
+  {
+    "objectID": "assignments/00-bash.html",
+    "href": "assignments/00-bash.html",
+    "title": "bash",
+    "section": "",
+    "text": "Warning\n\n\n\nFor this self directed tutorial you will need to download data-shell.zip and navigate to using a terminal. This could be “Terminal” within Rstudio, or a stand alone application.\nThe part of the operating system responsible for managing files and directories is called the file system. It organizes our data into files, which hold information, and directories (also called “folders”), which hold files or other directories.\nSeveral commands are frequently used to create, inspect, rename, and delete files and directories. To start exploring them, let’s open a shell window:\nThe dollar sign is a prompt, which shows us that the shell is waiting for input; your shell may show something more elaborate.\nType the command whoami, then press the Enter key (sometimes marked Return) to send the command to the shell. The command’s output is the ID of the current user, i.e., it shows us who the shell thinks we are:\nMore specifically, when we type whoami the shell:\nNext, let’s find out where we are by running a command called pwd (which stands for “print working directory”). At any moment, our current working directory is our current default directory, i.e., the directory that the computer assumes we want to run commands in unless we explicitly specify something else. Here, the computer’s response is /home/jovyan\nTo understand what a “home directory” is, let’s have a look at how the file system as a whole is organized. At the top is the root directory that holds everything else. We refer to it using a slash character / on its own; this is the leading slash in /home/jovyan."
+  },
+  {
+    "objectID": "assignments/00-bash.html#ls",
+    "href": "assignments/00-bash.html#ls",
+    "title": "bash",
+    "section": "ls",
+    "text": "ls\nLet’s see what’s in this directory by running ls, which stands for “listing”:\nls\ncreatures  molecules           pizza.cfg\ndata       north-pacific-gyre  solar.pdf\nDesktop    notes.txt           writing\n\nls prints the names of the files and directories in the current directory in alphabetical order, arranged neatly into columns. We can make its output more comprehensible by using the flag -F, which tells ls to add a trailing / to the names of directories:\nls -F\ncreatures/  molecules/           pizza.cfg\ndata/       north-pacific-gyre/  solar.pdf\nDesktop/    notes.txt            writing/\nHere, we can see that data-shell contains seven sub-directories. The names that don’t have trailing slashes, like notes.txt, pizza.cfg, and solar.pdf, are plain old files. And note that there is a space between ls and -F: without it, the shell thinks we’re trying to run a command called ls-F, which doesn’t exist."
+  },
+  {
+    "objectID": "assignments/00-bash.html#relative-path",
+    "href": "assignments/00-bash.html#relative-path",
+    "title": "bash",
+    "section": "relative path",
+    "text": "relative path\nNow let’s take a look at what’s in data-shell directory by running ls -F data, i.e., the command ls with the arguments -F and data. The second argument — the one without a leading dash — tells ls that we want a listing of something other than our current working directory:\n ls -F data\namino-acids.txt  animal-counts/  animals.txt  elements/  morse.txt  pdb/  planets.txt  salmon.txt  sunspot.txt\nThe output shows us that there are four text files and two sub-sub-directories. Organizing things hierarchically in this way helps us keep track of our work: it’s possible to put hundreds of files in our home directory, just as it’s possible to pile hundreds of printed papers on our desk, but it’s a self-defeating strategy.\nNotice, by the way that we spelled the directory name data. It doesn’t have a trailing slash: that’s added to directory names by ls when we use the -F flag to help us tell things apart. And it doesn’t begin with a slash because it’s a relative path, i.e., it tells ls how to find something from where we are, rather than from the root of the file system."
+  },
+  {
+    "objectID": "assignments/00-bash.html#absolute-path",
+    "href": "assignments/00-bash.html#absolute-path",
+    "title": "bash",
+    "section": "absolute path",
+    "text": "absolute path\nIf we run ls -F /data (with a leading slash) we get a different answer, because /data is an absolute path:\nls -F /data\nNote you will get an “No file” warning here. This is because we this directory does not exist.\nThe leading / tells the computer to follow the path from the root of the filesystem, so it always refers to exactly one directory, no matter where we are when we run the command.\nIf we wanted to use the **absolute path* to list out the contents of this directory we could used\nls -F /home/jovyan/data-shell/data/\nNote this would work no matter what our pwd is."
+  },
+  {
+    "objectID": "assignments/00-bash.html#nelles-pipeline-organizing-files",
+    "href": "assignments/00-bash.html#nelles-pipeline-organizing-files",
+    "title": "bash",
+    "section": "Nelle’s Pipeline: Organizing Files",
+    "text": "Nelle’s Pipeline: Organizing Files\nKnowing just this much about files and directories, Nelle is ready to organize the files that the protein assay machine will create. First, she creates a directory called north-pacific-gyre (to remind herself where the data came from). Inside that, she creates a directory called 2012-07-03, which is the date she started processing the samples. She used to use names like conference-paper and revised-results, but she found them hard to understand after a couple of years. (The final straw was when she found herself creating a directory called revised-revised-results-3.)\n\nNelle names her directories “year-month-day”, with leading zeroes for months and days, because the shell displays file and directory names in alphabetical order. If she used month names, December would come before July; if she didn’t use leading zeroes, November (‘11’) would come before July (‘7’).\n\nEach of her physical samples is labelled according to her lab’s convention with a unique ten-character ID, such as “NENE01729A”. This is what she used in her collection log to record the location, time, depth, and other characteristics of the sample, so she decides to use it as part of each data file’s name. Since the assay machine’s output is plain text, she will call her files NENE01729A.txt, NENE01812A.txt, and so on. All 1520 files will go into the same directory.\nIf she is in her home directory, Nelle can see what files she has using the command:\nls north-pacific-gyre/2012-07-03/\nThis is a lot to type, but she can let the shell do most of the work. If she types:\nls nor\nand then presses tab, the shell automatically completes the directory name for her:\nls north-pacific-gyre/\nIf she presses tab again, Bash will add 2012-07-03/ to the command, since it’s the only possible completion. Pressing tab again does nothing, since there are 1520 possibilities; pressing tab twice brings up a list of all the files, and so on. This is called tab completion, and we will see it in many other tools as we go on."
+  },
+  {
+    "objectID": "assignments/00-bash.html#key-points",
+    "href": "assignments/00-bash.html#key-points",
+    "title": "bash",
+    "section": "Key Points",
+    "text": "Key Points\n\nThe file system is responsible for managing information on the disk.\nInformation is stored in files, which are stored in directories (folders).\nDirectories can also store other directories, which forms a directory tree.\n/ on its own is the root directory of the whole filesystem.\nA relative path specifies a location starting from the current location.\nAn absolute path specifies a location from the root of the filesystem.\nDirectory names in a path are separated with / on Unix, but \\ on Windows.\n.. means “the directory above the current one”; . on its own means “the current directory”.\nMost files’ names are something.extension. The extension isn’t required, and doesn’t guarantee anything, but is normally used to indicate the type of data in the file.\nMost commands take options (flags) which begin with a -."
+  },
+  {
+    "objectID": "assignments/00-bash.html#word-count",
+    "href": "assignments/00-bash.html#word-count",
+    "title": "bash",
+    "section": "word count",
+    "text": "word count\nLet’s go into that directory with cd and run the command wc *.pdb. wc is the “word count” command: it counts the number of lines, words, and characters in files. The * in *.pdb matches zero or more characters, so the shell turns *.pdb into a complete list of .pdb files:\ncd molecules\n$ wc *.pdb\n\n  20  156 1158 cubane.pdb\n  12   84  622 ethane.pdb\n   9   57  422 methane.pdb\n  30  246 1828 octane.pdb\n  21  165 1226 pentane.pdb\n  15  111  825 propane.pdb\n 107  819 6081 total\n\nWildcards\n* is a wildcard. It matches zero or more characters, so *.pdb matches ethane.pdb, propane.pdb, and so on. On the other hand, p*.pdb only matches pentane.pdb and propane.pdb, because the ‘p’ at the front only matches itself.\n? is also a wildcard, but it only matches a single character. This means that p?.pdb matches pi.pdb or p5.pdb, but not propane.pdb. We can use any number of wildcards at a time: for example, p*.p?* matches anything that starts with a ‘p’ and ends with ‘.’, ‘p’, and at least one more character (since the ‘?’ has to match one character, and the final * can match any number of characters). Thus, p*.p?* would match preferred.practice, and even p.pi (since the first * can match no characters at all), but not quality.practice (doesn’t start with ‘p’) or preferred.p (there isn’t at least one character after the ‘.p’).\nWhen the shell sees a wildcard, it expands the wildcard to create a list of matching filenames before running the command that was asked for. This means that commands like wc and ls never see the wildcard characters, just what those wildcards matched. This is another example of orthogonal design.\nIf we run wc -l instead of just wc, the output shows only the number of lines per file:\nwc -l *.pdb\n  20  cubane.pdb\n  12  ethane.pdb\n   9  methane.pdb\n  30  octane.pdb\n  21  pentane.pdb\n  15  propane.pdb\n 107  total\nWe can also use -w to get only the number of words, or -c to get only the number of characters."
+  },
+  {
+    "objectID": "assignments/00-bash.html#redirect",
+    "href": "assignments/00-bash.html#redirect",
+    "title": "bash",
+    "section": "redirect",
+    "text": "redirect\nWhich of these files is shortest? It’s an easy question to answer when there are only six files, but what if there were 6000? Our first step toward a solution is to run the command:\nwc -l *.pdb > lengths\nThe > tells the shell to redirect the command’s output to a file instead of printing it to the screen. The shell will create the file if it doesn’t exist, or overwrite the contents of that file if it does. (This is why there is no screen output: everything that wc would have printed has gone into the file lengths instead.) ls lengths confirms that the file exists:\nls lengths\nlengths"
+  },
+  {
+    "objectID": "assignments/00-bash.html#cat",
+    "href": "assignments/00-bash.html#cat",
+    "title": "bash",
+    "section": "cat",
+    "text": "cat\nWe can now send the content of lengths to the screen using cat lengths. cat stands for “concatenate”: it prints the contents of files one after another. There’s only one file in this case, so cat just shows us what it contains:\ncat lengths\n  20  cubane.pdb\n  12  ethane.pdb\n   9  methane.pdb\n  30  octane.pdb\n  21  pentane.pdb\n  15  propane.pdb\n 107  total"
+  },
+  {
+    "objectID": "assignments/00-bash.html#sort",
+    "href": "assignments/00-bash.html#sort",
+    "title": "bash",
+    "section": "sort",
+    "text": "sort\nNow let’s use the sort command to sort its contents. We will also use the -n flag to specify that the sort is numerical instead of alphabetical. This does not change the file; instead, it sends the sorted result to the screen:\nsort -n lengths\n  9  methane.pdb\n 12  ethane.pdb\n 15  propane.pdb\n 20  cubane.pdb\n 21  pentane.pdb\n 30  octane.pdb\n107  total"
+  },
+  {
+    "objectID": "assignments/00-bash.html#head",
+    "href": "assignments/00-bash.html#head",
+    "title": "bash",
+    "section": "head",
+    "text": "head\nWe can put the sorted list of lines in another temporary file called sorted-lengths by putting > sorted-lengths after the command, just as we used > lengths to put the output of wc into lengths. Once we’ve done that, we can run another command called head to get the first few lines in sorted-lengths:\nsort -n lengths > sorted-lengths\nhead -1 sorted-lengths\n  9  methane.pdb\nUsing the parameter -1 with head tells it that we only want the first line of the file; -20 would get the first 20, and so on. Since sorted-lengths contains the lengths of our files ordered from least to greatest, the output of head must be the file with the fewest lines."
+  },
+  {
+    "objectID": "assignments/00-bash.html#pipe",
+    "href": "assignments/00-bash.html#pipe",
+    "title": "bash",
+    "section": "pipe",
+    "text": "pipe\nIf you think this is confusing, you’re in good company: even once you understand what wc, sort, and head do, all those intermediate files make it hard to follow what’s going on. We can make it easier to understand by running sort and head together:\nsort -n lengths | head -1\n  9  methane.pdb\nThe vertical bar between the two commands is called a pipe. It tells the shell that we want to use the output of the command on the left as the input to the command on the right. The computer might create a temporary file if it needs to, or copy data from one program to the other in memory, or something else entirely; we don’t have to know or care.\nWe can use another pipe to send the output of wc directly to sort, which then sends its output to head:\nwc -l *.pdb | sort -n | head -1\n  9  methane.pdb\n\nHere’s what actually happens behind the scenes when we create a pipe. When a computer runs a program—any program—it creates a process in memory to hold the program’s software and its current state. Every process has an input channel called standard input. (By this point, you may be surprised that the name is so memorable, but don’t worry: most Unix programmers call it “stdin”. Every process also has a default output channel called standard output] (or “stdout”)\n\n\nThe shell is actually just another program. Under normal circumstances, whatever we type on the keyboard is sent to the shell on its standard input, and whatever it produces on standard output is displayed on our screen. When we tell the shell to run a program, it creates a new process and temporarily sends whatever we type on our keyboard to that process’s standard input, and whatever the process sends to standard output to the screen.\nHere’s what happens when we run wc -l *.pdb > lengths. The shell starts by telling the computer to create a new process to run the wc program. Since we’ve provided some filenames as parameters, wc reads from them instead of from standard input. And since we’ve used > to redirect output to a file, the shell connects the process’s standard output to that file.\nIf we run wc -l *.pdb | sort -n instead, the shell creates two processes (one for each process in the pipe) so that wc and sort run simultaneously. The standard output of wc is fed directly to the standard input of sort; since there’s no redirection with >, sort’s output goes to the screen. And if we run wc -l *.pdb | sort -n | head -1, we get three processes with data flowing from the files, through wc to sort, and from sort through head to the screen.\nThis simple idea is why Unix has been so successful. Instead of creating enormous programs that try to do many different things, Unix programmers focus on creating lots of simple tools that each do one job well, and that work well with each other. This programming model is called pipes and filters. We’ve already seen pipes; a filter is a program like wc or sort that transforms a stream of input into a stream of output. Almost all of the standard Unix tools can work this way: unless told to do otherwise, they read from standard input, do something with what they’ve read, and write to standard output.\nThe key is that any program that reads lines of text from standard input and writes lines of text to standard output can be combined with every other program that behaves this way as well. You can and should write your programs this way so that you and other people can put those programs into pipes to multiply their power.\n\n\nRedirecting Input\nAs well as using > to redirect a program’s output, we can use < to redirect its input, i.e., to read from a file instead of from standard input. For example, instead of writing wc ammonia.pdb, we could write wc < ammonia.pdb. In the first case, wc gets a command line parameter telling it what file to open. In the second, wc doesn’t have any command line parameters, so it reads from standard input, but we have told the shell to send the contents of ammonia.pdb to wc’s standard input."
+  },
+  {
+    "objectID": "assignments/05-slidedeck.html",
+    "href": "assignments/05-slidedeck.html",
+    "title": "Project slidedeck",
+    "section": "",
+    "text": "Assignment\n\n\n\nTLDR: Create and publish a presentation in Quarto on you research project.\n\n\n\n\n\nStart by going to New File > Quarto Presentation. (Leave render type as default)\nSave file in research repo, in the code directory, with the prefix 05.\nCreate Slides using ## (Heading 2) to title new slide.\n\n\n\n\n\n\n\nTip\n\n\n\nYou can use same code and principles that you used for knitting a report in week three. Including the set-up chunk. Chunk options work the same way.\n\n\n\nPublish slides using Rpubs and provide link in readme.\n\n\n\n\nFor this assignment you will want to develop slides that\n\nClearly demonstrate your project goal\nMethods taken\nPreliminary Results\nOutline of next steps for next 4 weeks\n\n\n\n\n\nShow core code\nShow parts of initial data (could be first few lines etc)\nInclude a table\nInclude image\nInclude plot generated from code\nHighlight specific lines of code in code block"
+  },
+  {
+    "objectID": "assignments/10-compendium.html",
+    "href": "assignments/10-compendium.html",
+    "title": "New Release",
+    "section": "",
+    "text": "Assignment\n\n\n\nMake new release of repo such that Zenodo archive will be updated with better version of your repo."
+  },
+  {
+    "objectID": "assignments/07-CG.html",
+    "href": "assignments/07-CG.html",
+    "title": "CG Motifs",
+    "section": "",
+    "text": "Assignment\n\n\n\n\nIdentify any prior assignments you would like regraded (this week only). 2) Visualize CG motifs in 10 of your sequences.\n\n\n\n\nAmnesty\nThis week you can turn in all missing assignments to be assessed. Indicate your decision to do this and which specific assignments here\n\n\nCG Motifs\nFor this you will take 10 sequences related to your project, ID CG motifs using the emboss package: fuzznuc, and visualize in IGV. You do not have to follow this workflow exactly, but it is provided here for guidance. This uses R package seqinr.\n\n```{r}\nlibrary(seqinr)\n\n# Replace 'input.fasta' with the name of your multi-sequence fasta file\ninput_file <- \"input.fasta\"\nsequences <- read.fasta(input_file)\n\n```\n\n\n```{r}\n# Set the seed for reproducibility (optional)\nset.seed(42)\n\nnumber_of_sequences_to_select <- 10\n\nif (length(sequences) < number_of_sequences_to_select) {\n  warning(\"There are fewer than 10 sequences in the fasta file. All sequences will be selected.\")\n  number_of_sequences_to_select <- length(sequences)\n}\n\nselected_indices <- sample(length(sequences), number_of_sequences_to_select)\nselected_sequences <- sequences[selected_indices]\n\n```\n\n\n```{r}\n# Replace 'output.fasta' with your desired output file name\noutput_file <- \"../output/output.fasta\"\nwrite.fasta(selected_sequences, names(selected_sequences), output_file, open = \"w\")\n```\n\n\n```{bash}\n#likely will not need; fix issue where gff and fa name did not match\n# sed -i 's/>lcl|/>/g' ../output/10_seqs.fa\n```\n\n\n```{bash}\n#needed downstream for IGV\n/home/shared/samtools-1.12/samtools faidx \\\n../output/10_seqs.fa\n```\n\n\n```{bash}\nfuzznuc -sequence ../output/10_seqs.fa -pattern CG -rformat gff -outfile ../output/CGoutput.gff\n```\nPush these files to GitHub. Grab raw urls to visualize in IGV. Fasta file is the “genome”. Take 2 screenshots and place in code file. At the top of your code page be sure to provide link to visual report (rpubs). Alternatively you can also output to markdown."
+  },
+  {
+    "objectID": "assignments/03-knit.html",
+    "href": "assignments/03-knit.html",
+    "title": "Knitting Reports",
+    "section": "",
+    "text": "Screen Recording\n\n\n\n\n\n\n\n\n\n\n\nAssignment\n\n\n\nTLDR: Take what you did in week 1 & 2 and improve upon the code such that results have profound meaning, code is explained, and a pretty report is produced.\n\n\n\n\nNext Levelling\nFor the past two weeks you got the job done. Now lets not only learn how you go it done, but improve on the output and spend more time to create an html report. To create an attractive web-accessible report using RMarkdown, here are some steps to consider a strive for.\n\nWrite your RMarkdown content: An RMarkdown file consists of three main parts: YAML header, Markdown text, and R code chunks. Use Markdown for formatting text, and R code chunks to insert code and results.\n\n\n\nyaml\n\n---\ntitle: \"Your Report Title\"\nauthor: \"Your Name\"\ndate: \"May 31, 2023\"\noutput: \n  html_document:\n    theme: readable\n    toc: true\n    toc_float: true\n    number_sections: true\n    code_folding: show\n---\n\nThis example uses the “readable” theme and includes a table of contents, numbered sections, and code folding options.\nOther themes include: “default”, “cerulean”, “journal”, “flatly”, “darkly”, “readable”, “spacelab”, “united”, “cosmo”, “lumen”, “paper”, “sandstone”, “simplex”, “yeti”.\nCode highlights argument must be one of default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, breezedark, textmate, arrow, or rstudio or a file with extension .theme.\n\nMarkdown text: Use Markdown syntax for text formatting (headings, lists, links, etc.).\n\n## Introduction\n\nThis is a sample report created using RMarkdown. You can add *italic*, **bold**, or [links](https://example.com).\n\n- Bullet point 1\n- Bullet point 2\n\nR code chunks: Insert R code and its output in your report using R code chunks.\n\n```{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)\n```\n\n```{r example-plot}\nlibrary(ggplot2)\ndata(mtcars)\nggplot(mtcars, aes(x = wt, y = mpg)) + geom_point() + theme_minimal()\n```\n\nCustomize the appearance: Use CSS, HTML widgets, or additional R packages to further enhance the visual appeal of your report.\n\n\nCustom CSS: Create a separate CSS file and link it in the YAML header.\nHTML widgets: Use packages like leaflet for maps, DT for tables, or plotly for interactive plots.\nAdditional R packages: Use packages like kableExtra for formatting tables, flexdashboard for dashboard layouts, or formattable for conditional formatting.\n\n\nRender the report: In RStudio, click the “Knit” button to generate the HTML output.\nShare the report: Host the generated HTML file on a web server, or use services like GitHub Pages or RStudio Connect to share your report with others.\n\nBy combining RMarkdown with the right formatting, customizations, and packages, you can create visually appealing, web-accessible reports that effectively communicate your insights and analyses.\n\n\nPractical Aspects\nI would recommend copying prior Rmd files and renaming them with the prefix 03.1, 03.2, etc depending on how many separate pages make sense for you.\nThe specific things I will be looking for this week include\n1. Addressing prior comments\n2. Explaining what code is doing\n3. Making output more easily understandable\n4. Adding unique visual features\n5. Generation of html report.\n\n\n\n\n\n\nNote\n\n\n\nYou would want to only run (eval=TRUE) simple tasks in the knit, which is different than running chunk in Rmd.\n\n\n\n\n\n\n\n\nDanger\n\n\n\nBe careful about committing files, particularly those that are a result of cache. It is likely best to ignore those.\n\n\n\n\nInspiration\n3.1 Blast https://rpubs.com/sr320/1026094\n3.2 RNA-seq https://rpubs.com/sr320/1026190\nwhereas code is\n\nhttps://github.com/course-fish546-2023/steven-coursework/blob/main/assignments/code/3.1-blast.Rmd\nhttps://github.com/course-fish546-2023/steven-coursework/blob/main/assignments/code/3.2-dge.Rmd"
+  },
+  {
+    "objectID": "assignments/02-DGE.html",
+    "href": "assignments/02-DGE.html",
+    "title": "Differential Gene Expression",
+    "section": "",
+    "text": "Note\n\n\n\nSee screen recording here for some context though note below code is now revised.\nFor this assignment you will be taking RNA-seq reads off the sequencer, and determining what genes are expressed higher in treatment group A compared to treatments group B. Why would someone want to do this? This can tell you something about the physiological response to a “treatment”, which generally speaking could be anything from environment, disease, developmental stage, tissue, species…\nAs opposed to last week these files will be a little larger and compute effort will increase. It is good to pause here and decide what platform(s) you might want to use for this assignment."
+  },
+  {
+    "objectID": "assignments/02-DGE.html#downloading-reference",
+    "href": "assignments/02-DGE.html#downloading-reference",
+    "title": "Differential Gene Expression",
+    "section": "Downloading reference",
+    "text": "Downloading reference\nThis code grabs the Pacific oyster fasta file of genes and does so ignoring the fact that gannet does not have a security certificate to authenticate (--insecure). This is usually not recommended however we know the server.\n```{bash}\ncd ../data\ncurl --insecure -O https://gannet.fish.washington.edu/seashell/bu-github/nb-2023/Cgigas/data/rna.fna\n```\n\n\n\n\n\n\nNote\n\n\n\nCreating index can take some time\n\n\nThis code is indexing the file rna.fna while also renaming it as cgigas_roslin_rna.index.\n```{bash}\n/home/shared/kallisto/kallisto \\\nindex -i \\\n../data/cgigas_roslin_rna.index \\\n../data/rna.fna\n```"
+  },
+  {
+    "objectID": "assignments/02-DGE.html#downloading-sequence-reads",
+    "href": "assignments/02-DGE.html#downloading-sequence-reads",
+    "title": "Differential Gene Expression",
+    "section": "Downloading sequence reads",
+    "text": "Downloading sequence reads\nSequence reads are on a public server at https://gannet.fish.washington.edu/seashell/bu-github/nb-2023/Cgigas/data/nopp/\n\n\n\nSample\nSampleID\n\n\nD-control\nD54\n\n\nD-control\nD55\n\n\nD-control\nD56\n\n\nD-control\nD57\n\n\nD-control\nD58\n\n\nD-control\nD59\n\n\nD-control\nM45\n\n\nD-control\nM46\n\n\nD-control\nM48\n\n\nD-control\nM49\n\n\nD-control\nM89\n\n\nD-control\nM90\n\n\nD-desiccation\nN48\n\n\nD-desiccation\nN49\n\n\nD-desiccation\nN50\n\n\nD-desiccation\nN51\n\n\nD-desiccation\nN52\n\n\nD-desiccation\nN53\n\n\nD-desiccation\nN54\n\n\nD-desiccation\nN55\n\n\nD-desiccation\nN56\n\n\nD-desiccation\nN57\n\n\nD-desiccation\nN58\n\n\nD-desiccation\nN59\n\n\n\nThis code uses recursive feature of wget (see this weeks’ reading) to get all 24 files. Additionally as with curl above we are ignoring the fact there is not security certificate with --no-check-certificate\ncd ../data \nwget --recursive --no-parent --no-directories \\\n--no-check-certificate \\\n--accept '*.fastq.gz' \\\nhttps://gannet.fish.washington.edu/seashell/bu-github/nb-2023/Cgigas/data/nopp/\nThe next chunk first creates a subdirectory\nThen performs the following steps:\n\nUses the find utility to search for all files in the ../data/ directory that match the pattern *fastq.gz.\n\nUses the basename command to extract the base filename of each file (i.e., the filename without the directory path), and removes the suffix _L001_R1_001.fastq.gz.\nRuns the kallisto quant command on each input file, with the following options:\n\n\n-i ../data/cgigas_roslin_rna.index: Use the kallisto index file located at ../data/cgigas_roslin_rna.index.\n-o ../output/kallisto_01/{}: Write the output files to a directory called ../output/kallisto_01/ with a subdirectory named after the base filename of the input file (the {} is a placeholder for the base filename).\n-t 40: Use 40 threads for the computation.\n--single -l 100 -s 10: Specify that the input file contains single-end reads (–single), with an average read length of 100 (-l 100) and a standard deviation of 10 (-s 10).\nThe input file to process is specified using the {} placeholder, which is replaced by the base filename from the previous step.\n\n```{bash}\nmkdir ../output/kallisto_01\n\nfind ../data/*fastq.gz \\\n| xargs basename -s _L001_R1_001.fastq.gz | xargs -I{} /home/shared/kallisto/kallisto \\\nquant -i ../data/cgigas_roslin_rna.index \\\n-o ../output/kallisto_01/{} \\\n-t 40 \\\n--single -l 100 -s 10 ../data/{}_L001_R1_001.fastq.gz\n```\nThis command runs the abundance_estimates_to_matrix.pl script from the Trinity RNA-seq assembly software package to create a gene expression matrix from kallisto output files.\nThe specific options and arguments used in the command are as follows:\n\nperl /home/shared/trinityrnaseq-v2.12.0/util/abundance_estimates_to_matrix.pl: Run the abundance_estimates_to_matrix.pl script from Trinity.\n--est_method kallisto: Specify that the abundance estimates were generated using kallisto.\n--gene_trans_map none: Do not use a gene-to-transcript mapping file.\n--out_prefix ../output/kallisto_01: Use ../output/kallisto_01 as the output directory and prefix for the gene expression matrix file.\n--name_sample_by_basedir: Use the sample directory name (i.e., the final directory in the input file paths) as the sample name in the output matrix.\n\nAnd then there are the kallisto abundance files to use as input for creating the gene expression matrix.\n\n```{bash}\nperl /home/shared/trinityrnaseq-v2.12.0/util/abundance_estimates_to_matrix.pl \\\n--est_method kallisto \\\n    --gene_trans_map none \\\n    --out_prefix ../output/kallisto_01 \\\n    --name_sample_by_basedir \\\n    ../output/kallisto_01/D54_S145/abundance.tsv \\\n    ../output/kallisto_01/D56_S136/abundance.tsv \\\n    ../output/kallisto_01/D58_S144/abundance.tsv \\\n    ../output/kallisto_01/M45_S140/abundance.tsv \\\n    ../output/kallisto_01/M48_S137/abundance.tsv \\\n    ../output/kallisto_01/M89_S138/abundance.tsv \\\n    ../output/kallisto_01/D55_S146/abundance.tsv \\\n    ../output/kallisto_01/D57_S143/abundance.tsv \\\n    ../output/kallisto_01/D59_S142/abundance.tsv \\\n    ../output/kallisto_01/M46_S141/abundance.tsv \\\n    ../output/kallisto_01/M49_S139/abundance.tsv \\\n    ../output/kallisto_01/M90_S147/abundance.tsv \\\n    ../output/kallisto_01/N48_S194/abundance.tsv \\\n    ../output/kallisto_01/N50_S187/abundance.tsv \\\n    ../output/kallisto_01/N52_S184/abundance.tsv \\\n    ../output/kallisto_01/N54_S193/abundance.tsv \\\n    ../output/kallisto_01/N56_S192/abundance.tsv \\\n    ../output/kallisto_01/N58_S195/abundance.tsv \\\n    ../output/kallisto_01/N49_S185/abundance.tsv \\\n    ../output/kallisto_01/N51_S186/abundance.tsv \\\n    ../output/kallisto_01/N53_S188/abundance.tsv \\\n    ../output/kallisto_01/N55_S190/abundance.tsv \\\n    ../output/kallisto_01/N57_S191/abundance.tsv \\\n    ../output/kallisto_01/N59_S189/abundance.tsv\n```"
+  },
+  {
+    "objectID": "assignments/02-DGE.html#get-degs-based-on-desication",
+    "href": "assignments/02-DGE.html#get-degs-based-on-desication",
+    "title": "Differential Gene Expression",
+    "section": "Get DEGs based on Desication",
+    "text": "Get DEGs based on Desication\n```{r}\ndeseq2.colData <- data.frame(condition=factor(c(rep(\"control\", 12), rep(\"desicated\", 12))), \n                             type=factor(rep(\"single-read\", 24)))\nrownames(deseq2.colData) <- colnames(data)\ndeseq2.dds <- DESeqDataSetFromMatrix(countData = countmatrix,\n                                     colData = deseq2.colData, \n                                     design = ~ condition)\n```\n```{r}\ndeseq2.dds <- DESeq(deseq2.dds)\ndeseq2.res <- results(deseq2.dds)\ndeseq2.res <- deseq2.res[order(rownames(deseq2.res)), ]\n```\n```{r}\nhead(deseq2.res)\n```\n```{r}\n# Count number of hits with adjusted p-value less then 0.05\ndim(deseq2.res[!is.na(deseq2.res$padj) & deseq2.res$padj <= 0.05, ])\n```\n```{r}\ntmp <- deseq2.res\n# The main plot\nplot(tmp$baseMean, tmp$log2FoldChange, pch=20, cex=0.45, ylim=c(-3, 3), log=\"x\", col=\"darkgray\",\n     main=\"DEG Dessication  (pval <= 0.05)\",\n     xlab=\"mean of normalized counts\",\n     ylab=\"Log2 Fold Change\")\n# Getting the significant points and plotting them again so they're a different color\ntmp.sig <- deseq2.res[!is.na(deseq2.res$padj) & deseq2.res$padj <= 0.05, ]\npoints(tmp.sig$baseMean, tmp.sig$log2FoldChange, pch=20, cex=0.45, col=\"red\")\n# 2 FC lines\nabline(h=c(-1,1), col=\"blue\")\n```\n```{r}\nwrite.table(tmp.sig, \"../output/DEGlist.tab\", row.names = T)\n```"
+  },
+  {
+    "objectID": "assignments/09-backup.html",
+    "href": "assignments/09-backup.html",
+    "title": "Backup",
+    "section": "",
+    "text": "Assignment\n\n\n\nArchive your research repo with Zenodo AND rsync to another computer.\n\n\nThis week you will use Zenodo to archive your repo. See these instructions. Add the DOI from zenondo to your rpubs website.\nWe have used rsync in week 04. Use it this week to backup your entire directory on raven to another computer. In your code directory create a shell script named 00-rsync.sh with the rsync code used to backup your repo."
+  },
+  {
+    "objectID": "assignments/04-hyak.html",
+    "href": "assignments/04-hyak.html",
+    "title": "Hyak",
+    "section": "",
+    "text": "Screen Recording\n\n\n\n\n\n\n\n\n\n\n\nAssignment\n\n\n\nTLDR: log into hyak, run a job, and transfer the the output using rsync\n\n\n\n\nSetup\n\nGo to https://uwnetid.washington.edu/manage/\nClick the “Computing Services” link on the left\nClick the “Hyak Server” and “Lolo Server” check boxes in the “Inactive Services” section.\nClick the “Subscribe >” button at the bottom of the page.\nRead the notice and click the “Finish” button.\n\nFor two factor authentication, you can either sign up for Duo here and use your smart phone or request a security token here. Duo is much easier.\n\n\nLogging in\n\nOpen your favorite terminal\nType ssh <YourUWNetID>@mox.hyak.uw.edu (replace <YourUWNetID> with your own UW Net ID)\nInput your UWNetID password\nIf you’re signed up for 2-factor authentication via Duo, open your smart phone and approve the connection.\nYou’re logged in to a Login node for Hyak!\n\nExample:\nD-69-91-141-150:~ Sean$ ssh seanb80@mox.hyak.uw.edu\nPassword:\nEnter passcode or select one of the following options:\n\n 1. Duo Push to iOS (XXX-XXX-1239)\n 2. Phone call to iOS (XXX-XXX-1239)\n\nDuo passcode or option [1-2]: 1\nLast login: Thu Jun  8 14:59:10 2017 from d-173-250-161-130.dhcp4.washington.edu\n\n     ** NOTICE **\n     Users need to do all their interactive work, including compiling and\n     building software, on the compute nodes (n####) and NOT on the\n     head/login node (hyak.washington.edu). The login nodes are for\n     interacting with the scheduler and transferring data to and from the\n     system.\n\n     Please visit the Hyak User Wiki for more details\n     http://wiki.hyak.uw.edu\n\n\n[seanb80@mox2 ~]$\n\n\nRunning a job\nOnce logged into mox, navigate to /gscratch/scrubbed/your-username. If the dir is not there you shoud create. For every job you submit I recommend working within a directory. Usually I name these in a data format, but we can just mkdir assign_04.\nTo run a job you need to generate a shell script. Create a shell script in your code directory named 04-job.sh with contents such as.\n#!/bin/bash\n## Job Name\n#SBATCH --job-name=assign4\n## Allocation Definition\n#SBATCH --account=srlab\n#SBATCH --partition=srlab\n## Resources\n## Nodes\n#SBATCH --nodes=1\n## Walltime (days-hours:minutes:seconds format)\n#SBATCH --time=01-08:00:00\n## Memory per node\n#SBATCH --mem=100G\n#SBATCH --mail-type=ALL\n#SBATCH --mail-user=sr320@uw.edu\n## Specify the working directory for this job\n#SBATCH --chdir=/gscratch/scrubbed/sr320/assign_04\n\n#run a python script you wrote!\nmodule load intel-python3_2017\n\npython 04-hello.py\n\n# run blastx just to get manual\n/gscratch/srlab/programs/ncbi-blast-2.10.1+/bin/blastx -help\n\n#a few bash commands\npwd \n\nwhoami\n\necho \"yah! I ddi it!!!!!!!!!!\"\n\n#this writes out  tofile\necho \"yah! I ddi it!!!!!!!!!!\" > text.file\nYou will also want to write some python code :)\nCreate a Python Script in the same directory name 04-hello.py with the contents:\nprint(\"Hello, World!\")\nNow we want to move these two files to mox into the assign_04 directory. To to this you will need to type something to the effect of the following in the terminal\nrsync -avz assignments/code/04-* sr320@mox.hyak.uw.edu:/gscratch/scrubbed/sr320/assign_04\nThen on mox, inside the assign_04 directory you will type”\nsbatch 04-job-sh to schedule the job.\nOnce done you should have a couple of new files in the directory.\nYou will want to check them to see if everything worked and then move the output back to your repo…\nrsync -avz sr320@mox.hyak.uw.edu:/gscratch/scrubbed/sr320/assign_04/ ."
+  },
+  {
+    "objectID": "assignments/06-rnaseq-snp.html",
+    "href": "assignments/06-rnaseq-snp.html",
+    "title": "Alignment Data",
+    "section": "",
+    "text": "Assignment\n\n\n\nCreate and inspect and alignment files. Including visualizing and capturing “outside” graphics. Publish notebook in rpubs and provide link at top of code."
+  },
+  {
+    "objectID": "assignments/06-rnaseq-snp.html#download-alignment-data",
+    "href": "assignments/06-rnaseq-snp.html#download-alignment-data",
+    "title": "Alignment Data",
+    "section": "Download alignment data",
+    "text": "Download alignment data\n\n\n\n\n\n\nDanger\n\n\n\nReminder - these are big files, be sure to ignore on commit.\n\n\n```{r, engine='bash'}         \ncd ../data\ncurl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam\ncurl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam.bai\n```\n\n```{r, engine='bash'}         \ncd ../data\ncurl -O https://gannet.fish.washington.edu/seashell/bu-mox/data/Cvirg-genome/GCF_002022765.2_C_virginica-3.0_genomic.fa\ncurl -O https://gannet.fish.washington.edu/seashell/bu-mox/data/Cvirg-genome/GCF_002022765.2_C_virginica-3.0_genomic.fa.fai\n```"
+  },
+  {
+    "objectID": "assignments/06-rnaseq-snp.html#visualize-with-tview",
+    "href": "assignments/06-rnaseq-snp.html#visualize-with-tview",
+    "title": "Alignment Data",
+    "section": "Visualize with tview",
+    "text": "Visualize with tview\n\n\n\n\n\n\nImportant\n\n\n\nRun the following in Terminal as is interactive\n\n\n/home/shared/samtools-1.12/samtools tview \\\n../data/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam \\\n../data/GCF_002022765.2_C_virginica-3.0_genomic.fa"
+  },
+  {
+    "objectID": "assignments/06-rnaseq-snp.html#capture-image",
+    "href": "assignments/06-rnaseq-snp.html#capture-image",
+    "title": "Alignment Data",
+    "section": "Capture Image",
+    "text": "Capture Image\nTake a screen shot of the tview display and place in your notebook."
+  },
+  {
+    "objectID": "assignments/06-rnaseq-snp.html#alignment",
+    "href": "assignments/06-rnaseq-snp.html#alignment",
+    "title": "Alignment Data",
+    "section": "Alignment",
+    "text": "Alignment\n```{r, engine='bash'}\n/home/shared/hisat2-2.2.1/hisat2-build \\\n-f ../data/cgigas_uk_roslin_v1_genomic-mito.fa \\\n../output/cgigas_uk_roslin_v1_genomic-mito.index\n```\n\n```{r, engine='bash'}\n/home/shared/hisat2-2.2.1/hisat2 \\\n-x ../output/cgigas_uk_roslin_v1_genomic-mito.index \\\n-p 4 \\\n-1 ../data/F143n08_R1_001.fastq.gz \\\n-2 ../data/F143n08_R2_001.fastq.gz \\\n-S ../output/F143_cgigas.sam\n```\nTake a look\n```{r, engine='bash'}\ntail -1 ../output/F143_cgigas.sam\n```\n\n```{r, engine='bash'}\n# Convert SAM to BAM, using 4 additional threads\n/home/shared/samtools-1.12/samtools view -@ 4 -bS \\\n../output/F143_cgigas.sam > ../output/F143_cgigas.bam\n```\n\n```{r, engine='bash'}\n# Sort the BAM file, using 4 additional threads\n/home/shared/samtools-1.12/samtools sort -@ 4 \\\n../output/F143_cgigas.bam -o ../output/F143_cgigas_sorted.bam\n\n# Index the sorted BAM file (multi-threading is not applicable to this operation)\n/home/shared/samtools-1.12/samtools index \\\n../output/F143_cgigas_sorted.bam\n```"
+  },
+  {
+    "objectID": "assignments/06-rnaseq-snp.html#mpileup",
+    "href": "assignments/06-rnaseq-snp.html#mpileup",
+    "title": "Alignment Data",
+    "section": "mpileup",
+    "text": "mpileup\n\n\n\n\n\n\nNow bcftools is recommended for mpileup instead of samtools (which was described in textbook)\n\n\n\n\n\n\n\n\n```{r, engine='bash'}\n/home/shared/bcftools-1.14/bcftools mpileup --threads 4 --no-BAQ \\\n--fasta-ref ../data/cgigas_uk_roslin_v1_genomic-mito.fa \\\n../output/F143_cgigas_sorted.bam > ../output/F143_mpileup_output.txt\n```\n\n```{r, engine='bash'}\ntail ../output/F143_mpileup_output.txt\n```\n\n```{r, engine='bash'}\ncat ../output/F143_mpileup_output.txt \\\n| /home/shared/bcftools-1.14/bcftools call -mv -Oz \\\n> ../output/F143_mpile.vcf.gz\n```\n\n\n```{r, engine='bash'}\nzgrep \"^##\" -v ../output/F143_mpile.vcf.gz | \\\nawk 'BEGIN{OFS=\"\\t\"} {split($8, a, \";\"); print $1,$2,$4,$5,$6,a[1],$9,$10}' | head\n\n```\n\n\nThe code below might not work. That is fine. The VCF in the above chunk can be used for visualization in IGV.\n\n```{r, engine='bash'}\n/home/shared/bcftools-1.14/bcftools call \\\n-v -c ../output/F143_mpile.vcf.gz \\\n> ../output/F143_mpile_calls.vcf\n```"
+  },
+  {
+    "objectID": "assignments/06-rnaseq-snp.html#visualize",
+    "href": "assignments/06-rnaseq-snp.html#visualize",
+    "title": "Alignment Data",
+    "section": "Visualize",
+    "text": "Visualize\nthese data in IGV and get a few cool snapshots.\nMinimally show bam file, and at least 2 genome feature files.\nBonus for annotating screenshots.\nUseful link: https://robertslab.github.io/resources/Genomic-Resources/#crassostrea-gigas-cgigas_uk_roslin_v1"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bioinformatics for Environmental Sciences",
+    "section": "",
+    "text": "This course will teach core computing skills as well as project specific approaches. Each student will be developing and completing a research project targeting journal article submission by the end of the Quarter. There will be an emphasis on developing habits that increase automation which in turn will facilitate reproducibility. The primary course platform will be centered around GitHub, with each student creating their own repositories.\n\nT 3:00-4:20\nTh 9:30-11:20\nLocation FSH 203\nOffice Hours: Sign up via Google Calendar here.\n\n\n\n\n\n\nNote\n\n\n\nCalendar openings vary regularly - if you need a timeframe that is not available please let me know.\n\n\n\nWhile you likely have perceptions of glamour in considering this course, a majority of time you spend in this discipline will be 1) moving files around, 2) web searching for code, and 3) installing software (in that order)."
+  },
+  {
+    "objectID": "index.html#format",
+    "href": "index.html#format",
+    "title": "Bioinformatics for Environmental Sciences",
+    "section": "Format",
+    "text": "Format\nThis class is driven in part by students needs and will be somewhat flexible in content. It is very practical in nature and problem driven. On Tuesdays (after you complete your question set I will go over concepts, best practices necessary to complete the week’s assignment. This will also be a time where we provide solution to individual research project issues that are of general interest. Thursday will primarily be working sessions, a combination of the weeks coursework and making progress on your own research effort.\n\n\n\n\n\n\nImportant\n\n\n\nIt is expected that you come to class, or to queries, having already reviewed material provided so we can spend time together addressing questions and troubleshooting technical issues."
+  },
+  {
+    "objectID": "index.html#platforms",
+    "href": "index.html#platforms",
+    "title": "Bioinformatics for Environmental Sciences",
+    "section": "Platforms",
+    "text": "Platforms\nJupyterHub1 Instance: https://jupyter.rttl.uw.edu/2023-spring-fish-546-a\nCourse2 GitHub Organization: https://github.com/course-fish546-2023\nRaven: http://raven.fish.washington.edu:8787"
+  },
+  {
+    "objectID": "index.html#class-announcements",
+    "href": "index.html#class-announcements",
+    "title": "Bioinformatics for Environmental Sciences",
+    "section": "Class Announcements",
+    "text": "Class Announcements\n\nsee GitHub issues"
+  },
+  {
+    "objectID": "index.html#textbook",
+    "href": "index.html#textbook",
+    "title": "Bioinformatics for Environmental Sciences",
+    "section": "Textbook",
+    "text": "Textbook\nBioinformatics Data Skills:\nReproducible and Robust Research with Open Source Tools By Vince Buffalo Publisher: O’Reilly Media Final Release Date: July 2015 Pages: 538\n\nThe Supplementary Material Repository for Bioinformatics Data Skills\n\n@uw"
+  },
+  {
+    "objectID": "index.html#grading",
+    "href": "index.html#grading",
+    "title": "Bioinformatics for Environmental Sciences",
+    "section": "Grading",
+    "text": "Grading\nEach week there will be an assignment, you will need to made progress on your individual project, and complete a question set. You will give two presentations (Week 5; slides & Week 10 compendium). Question sets are based on a week’s reading and material and is due by 3:00pm on Tuesday. Thus you will need to review the “Topic” each week before class (and before answering the question set.\nCurrent Grades can be accessed at https://canvas.uw.edu/courses/1634025\n\n\n\n\n\n\n\n\nAssignments\nGrade percentage\ncomment\n\n\n\n\nWeekly Question Set\n25%\ndue Tuesday at 3:00pm\n\n\nWeekly Class Assignment\n35%\ndue Friday at 5:00pm\n\n\nWeekly Research Project Progress\n20%\nassessed Friday at 5:00pm\n\n\nProject Presentation\n10%\nWeek 5: slidedeck\n\n\nProject Completion\n10%\nWeek 10: compendium"
+  },
+  {
+    "objectID": "index.html#submitting-assignments",
+    "href": "index.html#submitting-assignments",
+    "title": "Bioinformatics for Environmental Sciences",
+    "section": "Submitting Assignments",
+    "text": "Submitting Assignments\n\nWeekly Question Set\nEach week there will be a markdown file linked in the schedule with a set of questions. You will add this to your course repo in a homework directory using the same filename. The only difference is you will include your answer to your questions.\n\n\nWeekly Class Assignment\nThis will completed in your course repo in a logical location. Use numeric prefix for file and directory names. The only thing you will need to be sure of is that all of your commits are pushed by Friday at 5:00pm.\n\n\nWeekly Research Project Progress\nThis will be assessed as a measure of progress from week to week. A primary means of assessment will be your response to issues, as well as accomplishment of self-assigned goals. In addition it will be expected that you use best principles as covered in the course.\n\n\nLate Policy\nAssignments turned in late will include a 40% decrease in points. Assignments will not be accepted following 5 days past due date/time."
+  },
+  {
+    "objectID": "index.html#useful-resources",
+    "href": "index.html#useful-resources",
+    "title": "Bioinformatics for Environmental Sciences",
+    "section": "Useful Resources",
+    "text": "Useful Resources\n\nMarineOmics Portal - website with genomic tutorials.\nsandbox.bio - Interactive bioinformatics tutorials\nAquamine - data mining system that integrates genome assemblies and gene annotation data for aquatic eumetazoan species\nHappy git with R - Happy Git provides opinionated instructions on how to:\n\nInstall Git and get it working smoothly with GitHub, in the shell and in the RStudio IDE.\nDevelop a few key workflows that cover your most common tasks.\nIntegrate Git and GitHub into your daily work with R and R Markdown."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "lectures/00-before.html",
+    "href": "lectures/00-before.html",
+    "title": "Course Preparation",
+    "section": "",
+    "text": "This course is designed for graduate students with core computational competence and an appropriate data set for analyses to be performed during the course. Before class starts (and add codes are distributed) the following tasks need to be completed.\n\nSubmit your github ID using this form.\nEstablish account on Roberts Lab (srlab) hyak account\nRead: Introducing the Shell\nRead: Navigating Files and Directories\nComplete this bash tutorial\nRead: Organize your data and code\nLearn (remember) proper project (repo) structure.\n\n\nFile StructureDataCode\n\n\n\nGood file structure\n\nAll project files in one main folder\nSubfolders (data, code, output)\n\nMain folder is R project\n\nSelf-contained project\nUse relative instead of absolute paths\n\nGood folder & file names\n\nDescriptive but not too long\nNo spaces\nConsistent format\n\n\n\n\n\nRaw data\n\nIn separate folder from cleaned data\nNever change!\nEach file should have metadata\n\n\n\n\n\nScripts with code\n\nRelative file paths to read in and create files\nLots of comments\nOrder: libraries, data, user-created functions, everything else\nGood variable & column names"
+  },
+  {
+    "objectID": "lectures/07-methylation.html#dna-methylation---software",
+    "href": "lectures/07-methylation.html#dna-methylation---software",
+    "title": "Epigenetics",
+    "section": "DNA methylation - Software",
+    "text": "DNA methylation - Software\nSeveral software tools are available for characterizing DNA methylation, including:\n\nBismark: This software aligns bisulfite-treated sequencing reads and generates methylation reports and visualization tools.\nMethylKit: It is a user-friendly package to perform DNA methylation analysis using NGS data, including differential methylation analysis, clustering, and annotation.\nMethpipe: It provides a suite of programs to preprocess bisulfite sequencing data, call differentially methylated regions, and perform enrichment analysis.\nRnBeads: This software offers a comprehensive and modular analysis of DNA methylation data, including normalization, quality control, visualization, and integration with other molecular features.\n\nIn summary, epigenetics is a fascinating field that has revolutionized our understanding of gene regulation and the impact of the environment on health and disease. By utilizing various techniques and software tools, bioinformaticians can explore epigenetic mechanisms in an integrative and comprehensive manner.\n\nVisualization\nThere are several software packages available for visualizing DNA methylation variation. Three popular ones are:\n\nIGV (Integrative Genomics Viewer): IGV is a high-performance, easy-to-use, interactive software tool for visualizing and exploring genomic data. It allows users to view various types of data, including DNA methylation, gene expression, and sequence alignments. IGV supports a wide range of file formats, making it a versatile option for researchers. You can find more information at https://software.broadinstitute.org/software/igv/.\nMethylation plotter: Methylation plotter is a user-friendly web tool that creates graphical representations of DNA methylation data. It allows users to upload data in a variety of formats and customize the visualization to display various methylation contexts, such as CpG islands, gene promoters, or gene bodies. You can access Methylation plotter at https://bioinfo2.ugr.es/methylation_plotter/.\nSeqMonk: SeqMonk is an open-source, interactive, and highly customizable software for the visualization and analysis of large genomic datasets, including DNA methylation data. It can handle data from various high-throughput sequencing platforms and provides numerous analysis options to help users explore and understand their data. You can find more information about SeqMonk and download the software at https://www.bioinformatics.babraham.ac.uk/projects/seqmonk/.\n\nThese software packages cater to different user needs and offer various features for visualizing and analyzing DNA methylation data. The choice of software largely depends on the specific requirements of your project and your level of expertise with genomic data analysis tools."
+  },
+  {
+    "objectID": "lectures/08-ranges.html",
+    "href": "lectures/08-ranges.html",
+    "title": "Genomic Ranges",
+    "section": "",
+    "text": "Screen Recording\n\n\n\n\n\n\n\nReading\nTextbook: Working with Range Data A crash course in Genomic Ranges 263-269\nWorking with Range Data with BEDtools 329-337\n\n\nObjectives\nUnderstand genomic ranges, what they are, and what they are useful for.\n\n\nGenomic Ranges:\nGenomic ranges are a way to represent regions of a genome, typically the start and end of specific features like genes, exons, or regulatory regions.\nA genomic range is typically represented by three pieces of information:\n\nChromosome: The chromosome on which the feature is located.\nStart position: The position on the chromosome where the feature begins.\nEnd position: The position on the chromosome where the feature ends.\n\nIt’s important to note that the start and end positions can refer to the genomic coordinates (see below), but it can also be as simple as the number of base pairs from the start of the chromosome.\n\n\nCoordinate Systems:\nIn genomics, there are two main types of coordinate systems:\n\n1-based coordinate system: In this system, the first base of a sequence is numbered as 1. This system is commonly used in most biological research, including genome annotations in databases such as GenBank and Ensembl.\n0-based coordinate system: In this system, the first base of a sequence is numbered as 0. This system is commonly used in some computational tools and languages, like Python and in the BED file format widely used in bioinformatics.\n\nThe distinction between 1-based and 0-based is important because it can lead to off-by-one errors if not accounted for.\nGenomicRanges Package:\nIn the R programming language, the GenomicRanges package is often used for handling genomic ranges. It provides a convenient and consistent way to handle and manipulate genomic ranges. Some of the functionalities include:\n\nCreating genomic ranges\nFinding overlaps between genomic ranges\nFinding the nearest genomic range\nShifting or narrowing genomic ranges\n\nHere’s a basic example of how you can create a GenomicRange object in R:\n# Loading the library\nlibrary(GenomicRanges)\n\n# Creating a GenomicRanges object\ngr <- GRanges(seqnames = \"chr1\", \n              ranges = IRanges(start = c(100, 200), end = c(150, 250)))\n\n# Printing the object\nprint(gr)\nUnderstanding genomic ranges and coordinate systems is crucial when dealing with any kind of genomic data, as it allows precise representation and manipulation of genomic features. Be sure to always check the documentation of any tool or database you’re using to understand what kind of coordinate system it uses, and always be consistent in your own work.\n\n\nBEDTools:\nBEDTools is a suite of utilities for comparing and manipulating genomic features in various formats such as BED, GFF/GTF, VCF, and BAM. These tools are incredibly powerful for handling genomic intervals and are often used in bioinformatics pipelines. Some of its features include:\n\nComparing genomic features\nManipulating genomic features\nCounting genomic features\nCreating coverage tracks\n\nHere’s a basic rundown of some of the most commonly used BEDTools subcommands:\n\nintersect\nbedtools intersect is used to find overlapping regions between two BED files. For example, you could use it to find genes (from a genes.BED file) that overlap with regulatory regions (from a regulatory_regions.BED file):\nbedtools intersect -a genes.BED -b regulatory_regions.BED\nmerge\nbedtools merge combines overlapping intervals into a single interval. For example, if you have a BED file with multiple overlapping regions, you can merge them into single, continuous regions:\nbedtools merge -i input.BED\nsort\nbedtools sort sorts a BED file by chromosome and then by start position. This is often necessary before using other BEDTools commands, as many require sorted input:\nbedtools sort -i input.BED\nclosest\nbedtools closest finds the closest non-overlapping interval. For example, for each gene (in genes.BED), you could find the closest regulatory region (in regulatory_regions.BED):\nbedtools closest -a genes.BED -b regulatory_regions.BED\ncoverage\nbedtools coverage calculates the coverage of one set of intervals over another. For example, you could calculate the coverage of sequencing reads (in reads.BED) over genes (in genes.BED):\nbedtools coverage -a genes.BED -b reads.BED\n\nLastly, BEDTools is flexible and powerful, but it can be complex. Always check the documentation and test your commands on small, controlled datasets to make sure they’re doing what you expect."
+  },
+  {
+    "objectID": "lectures/05-knit-slides.html#creating-a-presentation-in-quarto",
+    "href": "lectures/05-knit-slides.html#creating-a-presentation-in-quarto",
+    "title": "Knitting up some slides",
+    "section": "Creating a Presentation in Quarto",
+    "text": "Creating a Presentation in Quarto\nFollow these steps to create a presentation using Quarto:\n\nCreate a new Quarto presentation file: Create a new file with the extension .qmd (e.g., presentation.qmd). This file will contain your presentation content and code chunks.\nAdd YAML metadata: At the top of your .qmd file, include a YAML metadata block to specify the output format and other options. For a presentation, use the following:\n\n---\ntitle: \"Your Presentation Title\"\nformat: beamer\noutput:\n  beamer_presentation:\n    theme: metropolis\n    slide_level: 2\n---\n\nWrite your presentation: Use standard Markdown syntax for formatting your text and headings. To create a new slide, use a level-2 heading (e.g., ## Slide Title). You can include R, Python, or Julia code chunks using the following syntax:\n\n\n```{r}\n# Your R code here\n```\n\n```{python}\n# Your Python code here\n```"
+  },
+  {
+    "objectID": "lectures/06-snps.html#snps-in-rna-seq-data",
+    "href": "lectures/06-snps.html#snps-in-rna-seq-data",
+    "title": "Alignment Data and Genetic Variation",
+    "section": "SNPs in RNA-seq data",
+    "text": "SNPs in RNA-seq data\nFinding SNPs (Single Nucleotide Polymorphisms) in RNA-seq data is an essential step in understanding genetic variation and its effects on gene expression. Here is a summary of the process:\n\nQuality control and preprocessing: Start by assessing the quality of your raw RNA-seq reads using tools like FastQC. Trim low-quality bases and adapter sequences using software like Trimmomatic or Cutadapt to ensure accurate downstream analysis.\nAlignment: Align the cleaned RNA-seq reads to a reference genome using a spliced aligner like STAR, HISAT2, or TopHat2. These tools can handle the intron-exon structure of RNA-seq data and provide accurate alignments.\nSort and index alignments: Use SAMtools or Picard to convert the alignment output (SAM) to a binary format (BAM), sort, and index the aligned reads for efficient data processing.\nVariant calling: Employ a variant caller such as GATK’s HaplotypeCaller, SAMtools mpileup, or FreeBayes to identify SNPs and other genetic variants in your RNA-seq data. These tools use statistical models to call SNPs based on the differences observed between aligned reads and the reference genome.\nFiltering: Apply quality filters to remove low-confidence variant calls. Use tools like GATK’s VariantFiltration or BCFtools filter to set quality thresholds based on parameters like depth, quality score, strand bias, and mapping quality.\nAnnotation: Annotate the filtered SNPs using software like ANNOVAR, SnpEff, or VEP to gain insights into their potential functional effects on genes, transcripts, and proteins.\nDownstream analysis: Investigate the potential impact of SNPs on gene expression, alternative splicing, or allele-specific expression using tools like DESeq2, edgeR, or Cufflinks.\n\nRemember that this is only a general summary and specific steps might vary depending on the organism, reference genome, and experimental conditions. Always consult the documentation of the chosen tools and follow best practices for RNA-seq data analysis."
+  },
+  {
+    "objectID": "lectures/01-start-up.html",
+    "href": "lectures/01-start-up.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Screen Recording\n\n\n\n\n\n\n\nText Reading\nHow to Learn Bioinformatics 1-18;\nSetting Up and Managing a Bioinformatics Project 21-35;\n\n\n\nObjectives\n\n\nSetting up for Success!\nAs part of this class you will be learning fundamental skills in working with genomic data. In addition you will be carrying out an independent project throughout the quarter. Generally Tuesday will be learning a skillset and Thursday will be working on your independent project.\nEach student will have two GitHub repositories, one where you complete “classwork” and as one devoted to your project. Both need to be in the organization course-fish546-2023.\nThe name of these repos:\npreferredname-classwork and\npreferredname-projectdescriptor\n\n\n\n\n\n\nImportant\n\n\n\nMake sure you have you local repo clone in logical location (eg ~/Documents/GitHub) and that you do not move, nor place in Dropbox or similar syncing directory.\n\n\nBe sure to comply with guidelines\n\nFile StructureDataCode\n\n\n\nGood file structure\n\nAll project files in one main folder\nSubfolders (data, code, output)\n\nMain folder is R project\n\nSelf-contained project\nUse relative instead of absolute paths\n\nGood folder & file names\n\nDescriptive but not too long\nNo spaces\nConsistent format\n\n\n\n\n\nRaw data\n\nIn separate folder from cleaned data\nNever change!\nEach file should have metadata\n\n\n\n\n\nScripts with code\n\nRelative file paths to read in and create files\nLots of comments\nOrder: libraries, data, user-created functions, everything else\nGood variable & column names\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nMax GitHub file size is 100MB\n\n\nThere will be times when files are two big to include in repositories (or even you laptop). There will also be times when you have to run code outside of a GitHub repository. You will need to determine a way to effectively document this in your repository.\n\n\nComputers\nTo no surprise you will need to have some type of computer to do your analysis. This might seem trivial, but is not. In some instances you might you multiple machines. Generally speaking there are two primary consideration- RAM and CPUs (ie memory and power). Memory comes into play in running programs need to temporary store information like transcriptome assembly. Power is beneficial from programs that can use mulitple CPUs. For example if hardware has 48 cores, it could run a program faster than one with 4 cores. Note there are a lot of nuances here but it is good to have this vocabulary. Some of the work takes a long time (even on big machines) - meaning hours to weeks, thus hardware access needs consideration.\nSome of the options you have are\n- your personal laptop (borrowed laptop) - duration limited?\n- JupyterHub Instance - UW cloud machine, duration limited,\n- Roberts Lab Raven Rstudio server - cloud machine\n- Hyak Supercomputer - powerful - advanced interface\nFor simply typing (something that is also important) you can do this with almost anything with a keyboard. Note that GitHub will be the platform that allows you to move across machines.\nMost of the Assignments are designed to run on lightweigt hardware, and we might want to try experience different platforms to see what works best for you. It is important to keep in mind that if you using muliptle machines there is the possibility of causing git conflicts.\nOrganization and thought is important, particulary when it comes to this.\n\n\nWorking in the command-line\nHaving already reviewed the prep material and completed the bash tutorial you are now ready to get to coding.\nFor the first task you will take an unknown multi-fasta file and annotate it using blast. You are welcome to do this in terminal, Rstudio, or jupyter. My recommendation, and how I will demonstrate is using Rmarkdown. Once you have have your project structured, we will download software, databases, a fasta file and run the code.\nIn your code directory create a file.\n01-blast.Rmd\n\n\n\n\n\n\nTip\n\n\n\nRmarkdown is a good option as you can use markdown, add pictures and more!"
+  },
+  {
+    "objectID": "lectures/10-lastmile.html",
+    "href": "lectures/10-lastmile.html",
+    "title": "Final Presentations",
+    "section": "",
+    "text": "Screen Recording\n\n\n\n\n\n\n\nObjectives\nTo get you repo in pristine condition and effectively present your research compendium via your rpubs page.\n\n\nDetails\nOn Thursday you will be presenting your research project to the class. Everyone will have 10 minutes.\nThis presentation along with the rpubs compendium contents will be your Project Completion assignment grade.\nThis specific breakdown the Project Completion grade is as follows.\n\nGithub repo with clear directory structure, files in proper directory, code files numbered in order. (25%)\nRpubs page that has clear description of project at top targeting a general audience. (10%)\nRpubs page that has clear workflow taking initial files to resulting finding (in figure format). Visualization (eg head) of intermediate files and simple access to ultimate findings (eg tables). (30%)\nPresentation to the class that follows logical, planned highlighting of content. Things to include are research problem, workflow, findings, implication of findings and next steps (35%)\n\nMake sure there is only one URL (and it is the correct url) here"
+  },
+  {
+    "objectID": "lectures/03-rstudio.html#adding-tables",
+    "href": "lectures/03-rstudio.html#adding-tables",
+    "title": "Rstudio Fundamentals",
+    "section": "Adding tables:",
+    "text": "Adding tables:\n\nMarkdown syntax: You can create a simple table using pipes | and hyphens -. Here’s an example:\n\n| Column1 | Column2 | Column3 |\n|---------|---------|---------|\n| A       | B       | C       |\n| X       | Y       | Z       |\nThis will create a table with two rows and three columns.\n\nR code: You can create more complex tables using R packages like kable from the knitr package, or gt and flextable. Here’s an example using kable:\n\n```{r}\nlibrary(knitr)\n\ndata <- data.frame(\n  Column1 = c(\"A\", \"X\"),\n  Column2 = c(\"B\", \"Y\"),\n  Column3 = c(\"C\", \"Z\")\n)\n\nkable(data, caption = \"An example table\")\n```\nThis will generate a table with the specified data and caption."
+  },
+  {
+    "objectID": "lectures/03-rstudio.html#adding-images",
+    "href": "lectures/03-rstudio.html#adding-images",
+    "title": "Rstudio Fundamentals",
+    "section": "Adding images:",
+    "text": "Adding images:\n\nMarkdown syntax: You can insert an image using the following syntax: ![alt text](path/to/image \"Optional title\"). Here’s an example:\n\n![Example image](path/to/image.jpg \"Optional title\")\nMake sure to replace path/to/image.jpg with the actual file path or URL of the image.\n\nR code: You can also add images using R code, especially if you’re generating images with R plots. Here’s two examples:\n\n```{r}\nplot(cars, main = \"An example plot\", xlab = \"Speed\", ylab = \"Distance\")\n```\n```{r schemat, echo = FALSE, out.width = “70%”, fig.align = “center”}\nknitr::include_graphics(“img/ncbi.png”)\n```\nThe benefit of the this code as opposed to Mardown (above) is that you the ability to change size and align"
+  },
+  {
+    "objectID": "lectures/04-remote.html#reciprocal-blast",
+    "href": "lectures/04-remote.html#reciprocal-blast",
+    "title": "Remote Computing",
+    "section": "Reciprocal BLAST",
+    "text": "Reciprocal BLAST\nA reciprocal BLAST (Basic Local Alignment Search Tool) analysis is a technique used to identify homologous genes or proteins between two species by performing a BLAST search in both directions. In other words, it involves searching for similarities between a query sequence from species A against a database of sequences from species B, and then searching for similarities between a query sequence from species B against a database of sequences from species A. This approach helps confirm orthology, which is useful in comparative genomics and evolutionary studies.\nThree insightful visualizations of reciprocal BLAST analysis results could be:\n\nCircos Plot: A Circos plot is a circular layout that can display relationships between genomic sequences. In the context of reciprocal BLAST analysis, a Circos plot can effectively illustrate orthologous relationships between two species by connecting homologous genes or proteins with lines or curves. The strength of the connection (e.g., based on similarity scores or e-values) can be represented by the width or color of the lines, providing a comprehensive overview of the conservation between the two genomes.\nHeatmap: A heatmap is a graphical representation of data where values are represented by colors. In a reciprocal BLAST analysis, a heatmap can be used to visualize the similarity scores or e-values between pairs of orthologous genes or proteins. The rows and columns of the heatmap would represent genes or proteins from species A and species B, respectively, with the color intensity representing the strength of the orthologous relationship. This allows for easy identification of strongly conserved regions or potential functional similarities between the two species.\nScatter Plot with Dot Matrix: A scatter plot with dot matrix can visualize the distribution of reciprocal best hits (RBH) based on similarity scores or e-values. The x-axis would represent the scores or e-values for species A against species B, and the y-axis would represent the scores or e-values for species B against species A. Each dot on the plot would represent a pair of orthologs, with its position determined by the score or e-value in both directions. This visualization allows users to identify potential outliers, observe the overall correlation between the two species, and assess the quality of the reciprocal BLAST analysis results."
+  },
+  {
+    "objectID": "lectures/04-remote.html#saving-my-pat",
+    "href": "lectures/04-remote.html#saving-my-pat",
+    "title": "Remote Computing",
+    "section": "Saving my PAT",
+    "text": "Saving my PAT\n\nsee https://happygitwithr.com/https-pat.html?q=password#store-pat\n\ninstall.packages(\"gitcreds\")\ngitcreds::gitcreds_set()"
+  },
+  {
+    "objectID": "lectures/04-remote.html#chat-gpt-in-rstudio",
+    "href": "lectures/04-remote.html#chat-gpt-in-rstudio",
+    "title": "Remote Computing",
+    "section": "Chat GPT in Rstudio",
+    "text": "Chat GPT in Rstudio\nVideo of recent lab meeting"
+  },
+  {
+    "objectID": "lectures/09-project.html",
+    "href": "lectures/09-project.html",
+    "title": "Archiving",
+    "section": "",
+    "text": "Objectives\nLearn how to backup data and code so others can understand and your future self can understand.\n\n\nDocumenting and backing up code\nDocumenting and backing up code and data are crucial practices in genomics, data science, and other fields that involve programming or handling large amounts of data. Here’s why:\n\nTraceability and reproducibility: Clear documentation ensures that every piece of code, data, or computational process is traceable and reproducible. This is especially important when you want to replicate an analysis or experiment, debug an issue, or understand the progression and changes in the code or data over time.\nKnowledge sharing and collaboration: Documentation allows others to understand your work, making it easier for collaboration. It also enables knowledge transfer when team members change over time. Code without documentation is often useless to others and sometimes even to the person who originally wrote it after some time has passed.\nProfessionalism and quality assurance: Good documentation is a sign of professionalism and maturity in software development. It shows that the code or data has been well thought out and tested, and it allows for quality assurance processes such as code reviews and audits.\nDisaster recovery: Backups are essential for disaster recovery. If a server fails, or data gets corrupted, having a backup means you can restore the code or data and continue with minimal disruption. Backups also protect against accidental deletions and malicious actions.\n\nHere’s how to document and backup effectively:\n\nComment your code: Write clear comments in your code explaining what specific sections or lines of code are doing. Wherever possible, use self-explanatory variable and function names.\nWrite documentation: Use readme files, wikis, or similar resources to provide high-level documentation. This can include how to use and install the software, the structure of the code or data, known issues, and more. Tools like Doxygen or Javadoc can be helpful.\nUse version control systems: Tools like Git can track changes in code and help document the history and reasoning behind those changes. Git, in combination with platforms like GitHub, also allows you to back up your code online and collaborate with others.\nAutomate backups: Use automated tools to regularly back up your code and data. This could be a simple cron job that copies files to a different location, or more sophisticated solutions that can handle large datasets, such as AWS S3, Google Cloud Storage, or other data backup services.\nImplement a testing framework: This will serve as an additional form of documentation, explaining how the code is supposed to behave, and it provides a way to verify that changes to the code have not broken anything.\nUse data versioning tools: In case of data science projects, tools like DVC can be used to track changes in data and models over time, similar to how Git is used for code.\n\nDocumenting and backing up code and data are crucial practices in software development, data science, and other fields that involve programming or handling large amounts of data. Here’s why:\nRemember, good documentation and regular backups are not afterthoughts or luxuries—they’re essential components of professional, reliable, and resilient projects.\n\n\nArchiving a repo with Zenodo\nArchiving your GitHub repository with Zenodo allows you to have a digital object identifier (DOI) for your repo, which is useful for citing your software in academic papers. Here’s a step-by-step guide:\n\nCreate a Zenodo account. You’ll need to visit Zenodo’s homepage (https://zenodo.org/) and sign up for an account if you don’t already have one.\nLink GitHub with Zenodo. After you’ve set up your Zenodo account, you can navigate to the “GitHub” section in the dashboard and link your GitHub account to Zenodo.\nAuthorize Zenodo on GitHub. Zenodo will request access to your GitHub repositories. You can either allow Zenodo to access all your repositories or only select ones. After you’ve made your choice, click “Authorize Zenodo.”\nSelect the repository. Back in Zenodo, you should see a list of all your GitHub repositories. You can choose to archive any repository by toggling the switch to “on” next to the repository name. Zenodo will now create a “webhook” for this repository, which will notify Zenodo whenever there is a new release of the repository on GitHub.\nCreate a new release on GitHub. If you haven’t done so already, you should create a new release of your repository on GitHub. Go to your repository page, click “releases” then “create a new release”. Tag version with the version number (for example “v1.0”) and add some description about this release. Zenodo will be notified once the release is published.\nCheck Zenodo for the deposit. After creating a new release, go back to Zenodo. You should see the new release in the “Upload” section. Zenodo automatically fills in some of the metadata for you, such as the title and authors, but you can edit this if needed.\nPublish the archive on Zenodo. Finally, you can publish the archive on Zenodo. Make sure all the information is correct, and then click the “Publish” button. Your repository is now archived, and you will have a DOI that you can use to cite your software.\n\nRemember that Zenodo will archive a new version of your repository every time you create a new release on GitHub, so it’s important to create meaningful and well-documented releases. Zenodo also allows you to link different versions of your software together, so that it’s clear how the software has changed over time."
+  },
+  {
+    "objectID": "lectures/02-rna-seq.html#quality-control",
+    "href": "lectures/02-rna-seq.html#quality-control",
+    "title": "RNAs-seq",
+    "section": "Quality Control",
+    "text": "Quality Control\nThe first step in analyzing RNA-seq data is to perform quality control checks on the raw fastq files. This step is crucial to ensure that the data is of high quality and can be accurately quantified. One popular tool for quality control is FastQC, which generates various quality metrics such as per-base sequence quality, adapter contamination, and GC content.\nTo perform quality control using FastQC, run the following command:\nfastqc input.fastq\nThis will generate a HTML report that can be viewed in a web browser.\n\nAnother popular quality control program is fastp. Here is a very nice tutorial on using fastp"
+  },
+  {
+    "objectID": "lectures/02-rna-seq.html#marineomics-rna-seq-panel-discussion",
+    "href": "lectures/02-rna-seq.html#marineomics-rna-seq-panel-discussion",
+    "title": "RNAs-seq",
+    "section": "MarineOmics RNA-seq Panel Discussion",
+    "text": "MarineOmics RNA-seq Panel Discussion"
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Bioinformatics - FISH 546",
+    "section": "",
+    "text": "Date\nQuestions\nTopic\nAssignment\nProject Status\n\n\n\n\nlast week\n\nPreparing for class\nbash\n\n\n\nmar 27\nweek 01\nGetting Started\nNCBI Blast\nEstablish Repos\n\n\napr 03\nweek 02\nRNA-seq + Ariana Huffmyer\nDifferential Gene Expression\nExplore data, QC, add hashes\n\n\napr 10\nweek 03\nRStudio:knitr/ Fundamentals\nExplain and knit\nID endpoint in Readme. Start workflow.\n\n\napr 17\nweek 04\nRemote Computing\nHyak\nComplete sliced workflow (->endpoint)\n\n\napr 24\nweek 05\nQuatro\nPublishing Slides\nReadme w/ results (links), has plan for 4 weeks, issues resolved\n\n\nmay 01\nweek 06\nAlignment Data\nVariants and Visualize\nA weeks’ progress\n\n\nmay 08\nweek 07\nEpigenetics + Matt George\nAmnesty, Motifs, and IGV\nLaunch project report (rpubs), all sections noted\n\n\nmay 15\nweek 08\nGenomic Ranges\nBEDtools\nexample / mock ultimate figure\n\n\nmay 22\nweek 09\nArchiving\nBackup\nclear repo organization\n\n\nmay 29\nweek 10\nPresentations\nFinal Release\nCompendium"
+  },
+  {
+    "objectID": "questions/week09.html",
+    "href": "questions/week09.html",
+    "title": "Week 09 Questions",
+    "section": "",
+    "text": "What is your goal with respect to your research project to get accomplished this week?\nWhat is the overall status of your research repo? Is it will organized with a clear Readme file? Are file names and directory clear? Would your classmates be able to understand what the code in your files is designed to do?\nGo to one of your classmates rpubs link (see issues). What are three things you think are neat? What are two things that are really not that clear to you?"
+  },
+  {
+    "objectID": "questions/week08.html",
+    "href": "questions/week08.html",
+    "title": "Week 08 Questions",
+    "section": "",
+    "text": "What is a genomic range and what 3 types of information do you need for a range?\nWhat does 0-based and 1-based refer to? What are the advantages and disadvantages of each?\nWhat is the value of BEDtools over the bioconductor package GenomicRange?\nDescribe one subcommand of the BEDtools suite as well as a practical use case."
+  },
+  {
+    "objectID": "questions/week01.html",
+    "href": "questions/week01.html",
+    "title": "Bioinformatics - FISH 546",
+    "section": "",
+    "text": "What is your prior experience in this discipline?\nWhat do you hope to get out of this class?\nThis class is strongly rooted in an independent project related to genomic analyses. What specific project do you have in mind? If you do not have any data or preference, data can be provided / aquired. If you do not have a specfic project, what approach would you like to master as part of this class?\nWhat are two things you found most useful from the reading?"
+  },
+  {
+    "objectID": "questions/week06.html",
+    "href": "questions/week06.html",
+    "title": "Week 06 Questions",
+    "section": "",
+    "text": "What are SAM/BAM files? What is the difference between to the two?\nsamtoolsis a popular program for working with alignment data. What are three common tasks that this software is used for?\nWhy might you want to visualize alignment data and what are two program that can be used for this?\nDescribe what VCF file is?"
+  },
+  {
+    "objectID": "questions/week07.html",
+    "href": "questions/week07.html",
+    "title": "Week 07 Questions",
+    "section": "",
+    "text": "What is your current grade in the class? How many issues are open in our research repository?\nRe-reading this week’s reading, what are 2 things that resonate with you now that made little practical sense in week 2. What is one aspect that you still wonder about or is unclear?\nWhat is epigenetics and how could it relate to your own research project?\nDescribe what a GFF file is?\nWhat are two ways describing CG motifs could have value?"
+  },
+  {
+    "objectID": "questions/week05.html",
+    "href": "questions/week05.html",
+    "title": "Week 05 Questions",
+    "section": "",
+    "text": "What is Quarto?\nHow do you make columns using Revealjs in Quarto Presentations?\nHow would you change the appearance of slides using Revealjs in Quarto Presentations?\nWhat has been the biggest constraint working on your own research project in the past week?"
+  },
+  {
+    "objectID": "questions/week04.html",
+    "href": "questions/week04.html",
+    "title": "Week 04 Questions",
+    "section": "",
+    "text": "What is tmux and how does this relate to our current way of working on raven?\nWhat is ssh and what would the code be you would type if you were going to ssh into raven?\nWhat has been the most challenging part of your research project? Are you happy with your organization skills? If not what could be improved?\nFor last weeks assignment what did you appreciate the most about knitting documents?"
+  },
+  {
+    "objectID": "questions/week10.html",
+    "href": "questions/week10.html",
+    "title": "Week 10 Questions",
+    "section": "",
+    "text": "Looking back on the quarter what are two things you were not expecting to learn but did, glad you did, and how would you implement this knowledge beyond this class?\nRank the following from 1-5, with 1 being your best friend and 5 being your enemy (raven, rstudio, knitr, bash, github)\nAs part of your research project you must of learned something beyond methods. What is the most important biological finding from your work to to date? Assuming you follow this line of research what is your long term goal of what you expect to learn about biology, ecology, or the environment?"
+  },
+  {
+    "objectID": "questions/week03.html",
+    "href": "questions/week03.html",
+    "title": "Week 03 Questions",
+    "section": "",
+    "text": "An R Markdown file is plain text file that contains what 3 important types of content?\nWhat is a chunk and how do you add them? of the many chunk options which one do you think you will use the most and why? How is inline code different than code chunks?\nWhat’s gone wrong with this code? Why are the points not blue?\n\nggplot(data = mpg) + \n  geom_point(mapping = aes(x = displ, y = hwy, color = \"blue\"))\n\n\n\nplot\n\n\n\nOf the many things we have done in class the past two weeks, what is one aspect you would like to revisit and spend more time on?"
+  },
+  {
+    "objectID": "questions/week02.html",
+    "href": "questions/week02.html",
+    "title": "Week 02 Questions",
+    "section": "",
+    "text": "You can simply copy and paste this markdown text\n## Week 02 Question Set\n\na)  **What do you feel was the most impressive thing you did in class last week was?**\n\nb)  **What is your weekly goal for making progress on your project? What is the next step?**\n\nc)  **There were two readings this week not from the textbook, meant for two different audiences. Which reading did you get the most out of and why? Do you have any questions regarding the Journal of Shellfish Research paper?**\n\nd)  **What is your favorite thing about markdown and why?**\n\n\ne) **What is the differnce between `curl` and `wget`? When would you used one over the other?"
+  }
+]

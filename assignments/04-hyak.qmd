@@ -1,0 +1,145 @@
+---
+title: "Hyak"
+subtitle: "In need more that just raven"
+
+format:
+  html:
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    highlight-style: github
+    code-overflow: wrap
+---
+
+# Screen Recording
+
+[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/13ucJGRxtOYIW-1fHYAcxYdHiLtvyOOELxRf_f4S1Z1JhlcGflmoHo7lGUFEoKPK.JApMBrRCKtvpCHlX)
+
+::: callout-important
+## Assignment
+
+TLDR: log into hyak, run a job, and transfer the the output using `rsync`
+:::
+
+# Setup
+
+1.  Go to <https://uwnetid.washington.edu/manage/>
+
+2.  Click the "Computing Services" link on the left
+
+3.  Click the "Hyak Server" and "Lolo Server" check boxes in the "Inactive Services" section.
+
+4.  Click the "Subscribe \>" button at the bottom of the page.
+
+5.  Read the notice and click the "Finish" button.
+
+For two factor authentication, you can either sign up for Duo [here](https://identity.uw.edu/2fa/) and use your smart phone or request a security token [here](http://www.washington.edu/itconnect/service/authentication/). Duo is much easier.
+
+# Logging in
+
+1.  Open your favorite terminal
+
+2.  Type `ssh <YourUWNetID>@mox.hyak.uw.edu` (replace `<YourUWNetID>` with your own UW Net ID)
+
+3.  Input your UWNetID *password*
+
+4.  If you're signed up for 2-factor authentication via Duo, open your smart phone and approve the connection.
+
+5.  You're logged in to a Login node for Hyak!
+
+Example:
+
+``` bash
+D-69-91-141-150:~ Sean$ ssh seanb80@mox.hyak.uw.edu
+Password:
+Enter passcode or select one of the following options:
+
+ 1. Duo Push to iOS (XXX-XXX-1239)
+ 2. Phone call to iOS (XXX-XXX-1239)
+
+Duo passcode or option [1-2]: 1
+Last login: Thu Jun  8 14:59:10 2017 from d-173-250-161-130.dhcp4.washington.edu
+
+     ** NOTICE **
+     Users need to do all their interactive work, including compiling and
+     building software, on the compute nodes (n####) and NOT on the
+     head/login node (hyak.washington.edu). The login nodes are for
+     interacting with the scheduler and transferring data to and from the
+     system.
+
+     Please visit the Hyak User Wiki for more details
+     http://wiki.hyak.uw.edu
+
+
+[seanb80@mox2 ~]$
+```
+
+# Running a job
+
+Once logged into mox, navigate to `/gscratch/scrubbed/your-username`. If the dir is not there you shoud create. For every job you submit I recommend working within a directory. Usually I name these in a data format, but we can just `mkdir assign_04`.
+
+To run a job you need to generate a shell script. Create a shell script in your code directory named 04-job.sh with contents such as.
+
+``` bash
+#!/bin/bash
+## Job Name
+#SBATCH --job-name=assign4
+## Allocation Definition
+#SBATCH --account=srlab
+#SBATCH --partition=srlab
+## Resources
+## Nodes
+#SBATCH --nodes=1
+## Walltime (days-hours:minutes:seconds format)
+#SBATCH --time=01-08:00:00
+## Memory per node
+#SBATCH --mem=100G
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=sr320@uw.edu
+## Specify the working directory for this job
+#SBATCH --chdir=/gscratch/scrubbed/sr320/assign_04
+
+#run a python script you wrote!
+module load intel-python3_2017
+
+python 04-hello.py
+
+# run blastx just to get manual
+/gscratch/srlab/programs/ncbi-blast-2.10.1+/bin/blastx -help
+
+#a few bash commands
+pwd 
+
+whoami
+
+echo "yah! I ddi it!!!!!!!!!!"
+
+#this writes out  tofile
+echo "yah! I ddi it!!!!!!!!!!" > text.file
+```
+
+You will also want to write some python code :)
+
+Create a Python Script in the same directory name 04-hello.py with the contents:
+
+``` python
+print("Hello, World!")
+```
+
+Now we want to move these two files to mox into the assign_04 directory. To to this you will need to type something to the effect of the following in the terminal
+
+``` bash
+rsync -avz assignments/code/04-* sr320@mox.hyak.uw.edu:/gscratch/scrubbed/sr320/assign_04
+```
+
+Then on mox, inside the `assign_04` directory you will type"
+
+`sbatch 04-job-sh` to schedule the job.
+
+Once done you should have a couple of new files in the directory.
+
+You will want to check them to see if everything worked and then move the output back to your repo...
+
+``` bash
+rsync -avz sr320@mox.hyak.uw.edu:/gscratch/scrubbed/sr320/assign_04/ .
+```
