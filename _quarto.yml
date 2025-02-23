@@ -26,8 +26,8 @@ website:
 format:
   html:
     theme:
-      dark: darkly
-      light: flatly
+      dark: superhero
+      light: Lumen
     css: styles.css
     toc: true
 
