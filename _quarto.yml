@@ -3,14 +3,14 @@ project:
   output-dir: docs
 
 website:
-  title: "Bioinformatics - FISH 546"
+  title: "2025 :: Bioinformatics - FISH 546"
   navbar:
     left:
       - href: index.qmd
         text: Syllabus
       - href: schedule.qmd
         text: Schedule
-      - href: https://github.com/course-fish546-2023
+      - href: https://github.com/course-fish546-2025
         text: GitHub Org
       
       
