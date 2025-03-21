@@ -65,9 +65,11 @@ Let's see what's in this directory by running `ls`, which stands for "listing":
 ls
 ```
 
-    creatures  molecules           pizza.cfg
-    data       north-pacific-gyre  solar.pdf
-    Desktop    notes.txt           writing
+```         
+creatures  molecules           pizza.cfg
+data       north-pacific-gyre  solar.pdf
+Desktop    notes.txt           writing
+```
 
 <img src="https://raw.githubusercontent.com/sr320/course-fish274-2021/main/docs/img/ls-image.png" alt="Nelle&apos;s Home Directory"/>
 
@@ -77,9 +79,11 @@ ls
 ls -F
 ```
 
-    creatures/  molecules/           pizza.cfg
-    data/       north-pacific-gyre/  solar.pdf
-    Desktop/    notes.txt            writing/
+```         
+creatures/  molecules/           pizza.cfg
+data/       north-pacific-gyre/  solar.pdf
+Desktop/    notes.txt            writing/
+```
 
 Here, we can see that `data-shell` contains seven **sub-directories**. The names that don't have trailing slashes, like `notes.txt`, `pizza.cfg`, and `solar.pdf`, are plain old files. And note that there is a space between `ls` and `-F`: without it, the shell thinks we're trying to run a command called `ls-F`, which doesn't exist.
 
@@ -91,7 +95,9 @@ Now let's take a look at what's in `data-shell` directory by running `ls -F data
  ls -F data
 ```
 
-    amino-acids.txt  animal-counts/  animals.txt  elements/  morse.txt  pdb/  planets.txt  salmon.txt  sunspot.txt
+```         
+amino-acids.txt  animal-counts/  animals.txt  elements/  morse.txt  pdb/  planets.txt  salmon.txt  sunspot.txt
+```
 
 The output shows us that there are four text files and two sub-sub-directories. Organizing things hierarchically in this way helps us keep track of our work: it's possible to put hundreds of files in our home directory, just as it's possible to pile hundreds of printed papers on our desk, but it's a self-defeating strategy.
 
@@ -173,9 +179,11 @@ We now know how to explore files and directories, but how do we create them in t
 ls -F
 ```
 
-    creatures/  molecules/           pizza.cfg
-    data/       north-pacific-gyre/  solar.pdf
-    Desktop/    notes.txt            writing/
+```         
+creatures/  molecules/           pizza.cfg
+data/       north-pacific-gyre/  solar.pdf
+Desktop/    notes.txt            writing/
+```
 
 Let's create a new directory called `thesis` using the command `mkdir thesis` (which has no output):
 
@@ -189,10 +197,12 @@ As you might (or might not) guess from its name, `mkdir` means "make directory".
 ls -F
 ```
 
-    creatures/  north-pacific-gyre/  thesis/
-    data/       notes.txt            writing/
-    Desktop/    pizza.cfg
-    molecules/  solar.pdf
+```         
+creatures/  north-pacific-gyre/  thesis/
+data/       notes.txt            writing/
+Desktop/    pizza.cfg
+molecules/  solar.pdf
+```
 
 However, there's nothing in it yet:
 
@@ -223,7 +233,9 @@ Once our file is saved, we can use **Control-X** to quit the editor and return t
 ls
 ```
 
-    draft.txt
+```         
+draft.txt
+```
 
 Let's tidy up by running `rm draft.txt`:
 
@@ -405,8 +417,10 @@ Now that we know a few basic commands, we can finally look at the shell's most p
 ls molecules
 ```
 
-    cubane.pdb    ethane.pdb    methane.pdb
-    octane.pdb    pentane.pdb   propane.pdb
+```         
+cubane.pdb    ethane.pdb    methane.pdb
+octane.pdb    pentane.pdb   propane.pdb
+```
 
 ## word count
 
@@ -416,15 +430,17 @@ Let's go into that directory with `cd` and run the command `wc *.pdb`. `wc` is t
 cd molecules
 ```
 
-    $ wc *.pdb
+```         
+$ wc *.pdb
 
-      20  156 1158 cubane.pdb
-      12   84  622 ethane.pdb
-       9   57  422 methane.pdb
-      30  246 1828 octane.pdb
-      21  165 1226 pentane.pdb
-      15  111  825 propane.pdb
-     107  819 6081 total
+  20  156 1158 cubane.pdb
+  12   84  622 ethane.pdb
+   9   57  422 methane.pdb
+  30  246 1828 octane.pdb
+  21  165 1226 pentane.pdb
+  15  111  825 propane.pdb
+ 107  819 6081 total
+```
 
 ### Wildcards
 
@@ -440,13 +456,15 @@ If we run `wc -l` instead of just `wc`, the output shows only the number of line
 wc -l *.pdb
 ```
 
-      20  cubane.pdb
-      12  ethane.pdb
-       9  methane.pdb
-      30  octane.pdb
-      21  pentane.pdb
-      15  propane.pdb
-     107  total
+```         
+  20  cubane.pdb
+  12  ethane.pdb
+   9  methane.pdb
+  30  octane.pdb
+  21  pentane.pdb
+  15  propane.pdb
+ 107  total
+```
 
 We can also use `-w` to get only the number of words, or `-c` to get only the number of characters.
 
@@ -464,7 +482,9 @@ The `>` tells the shell to redirect the command's output to a file instead of pr
 ls lengths
 ```
 
-    lengths
+```         
+lengths
+```
 
 ## cat
 
@@ -474,13 +494,15 @@ We can now send the content of `lengths` to the screen using `cat lengths`. `cat
 cat lengths
 ```
 
-      20  cubane.pdb
-      12  ethane.pdb
-       9  methane.pdb
-      30  octane.pdb
-      21  pentane.pdb
-      15  propane.pdb
-     107  total
+```         
+  20  cubane.pdb
+  12  ethane.pdb
+   9  methane.pdb
+  30  octane.pdb
+  21  pentane.pdb
+  15  propane.pdb
+ 107  total
+```
 
 ## sort
 
@@ -490,13 +512,15 @@ Now let's use the `sort` command to sort its contents. We will also use the -n f
 sort -n lengths
 ```
 
-      9  methane.pdb
-     12  ethane.pdb
-     15  propane.pdb
-     20  cubane.pdb
-     21  pentane.pdb
-     30  octane.pdb
-    107  total
+```         
+  9  methane.pdb
+ 12  ethane.pdb
+ 15  propane.pdb
+ 20  cubane.pdb
+ 21  pentane.pdb
+ 30  octane.pdb
+107  total
+```
 
 ## head
 
@@ -507,7 +531,9 @@ sort -n lengths > sorted-lengths
 head -1 sorted-lengths
 ```
 
-      9  methane.pdb
+```         
+  9  methane.pdb
+```
 
 Using the parameter `-1` with `head` tells it that we only want the first line of the file; `-20` would get the first 20, and so on. Since `sorted-lengths` contains the lengths of our files ordered from least to greatest, the output of `head` must be the file with the fewest lines.
 
@@ -519,7 +545,9 @@ If you think this is confusing, you're in good company: even once you understand
 sort -n lengths | head -1
 ```
 
-      9  methane.pdb
+```         
+  9  methane.pdb
+```
 
 The vertical bar between the two commands is called a [pipe](../../gloss.html#pipe). It tells the shell that we want to use the output of the command on the left as the input to the command on the right. The computer might create a temporary file if it needs to, or copy data from one program to the other in memory, or something else entirely; we don't have to know or care.
 
@@ -529,7 +557,9 @@ We can use another pipe to send the output of `wc` directly to `sort`, which the
 wc -l *.pdb | sort -n | head -1
 ```
 
-      9  methane.pdb
+```         
+  9  methane.pdb
+```
 
 > Here's what actually happens behind the scenes when we create a pipe. When a computer runs a program---any program---it creates a process in memory to hold the program's software and its current state. Every process has an input channel called standard input. (By this point, you may be surprised that the name is so memorable, but don't worry: most Unix programmers call it "stdin". Every process also has a default output channel called standard output\] (or "stdout")
 
@@ -558,13 +588,15 @@ wc -l *.txt
 
 The output is 1520 lines that look like this:
 
-    300 NENE01729A.txt
-    300 NENE01729B.txt
-    300 NENE01736A.txt
-    300 NENE01751A.txt
-    300 NENE01751B.txt
-    300 NENE01812A.txt
-    ... ...
+```         
+300 NENE01729A.txt
+300 NENE01729B.txt
+300 NENE01736A.txt
+300 NENE01751A.txt
+300 NENE01751B.txt
+300 NENE01812A.txt
+... ...
+```
 
 Now she types this:
 
@@ -572,11 +604,13 @@ Now she types this:
 wc -l *.txt | sort -n | head -5
 ```
 
-     240 NENE02018B.txt
-     300 NENE01729A.txt
-     300 NENE01729B.txt
-     300 NENE01736A.txt
-     300 NENE01751A.txt
+```         
+ 240 NENE02018B.txt
+ 300 NENE01729A.txt
+ 300 NENE01729B.txt
+ 300 NENE01736A.txt
+ 300 NENE01751A.txt
+```
 
 Whoops: one of the files is 60 lines shorter than the others. When she goes back and checks it, she sees that she did that assay at 8:00 on a Monday morning---someone was probably in using the machine on the weekend, and she forgot to reset it. Before re-running that sample, she checks to see if any files have too much data:
 
@@ -584,11 +618,13 @@ Whoops: one of the files is 60 lines shorter than the others. When she goes back
 wc -l *.txt | sort -n | tail -5
 ```
 
-     300 NENE02040A.txt
-     300 NENE02040B.txt
-     300 NENE02040Z.txt
-     300 NENE02043A.txt
-     300 NENE02043B.txt
+```         
+ 300 NENE02040A.txt
+ 300 NENE02040B.txt
+ 300 NENE02040Z.txt
+ 300 NENE02043A.txt
+ 300 NENE02043B.txt
+```
 
 Those numbers look good---but what's that 'Z' doing there in the third-to-last line? All of her samples should be marked 'A' or 'B'; by convention, her lab uses 'Z' to indicate samples with missing information. To find others like it, she does this:
 
@@ -596,7 +632,9 @@ Those numbers look good---but what's that 'Z' doing there in the third-to-last l
 ls *Z.txt
 ```
 
-    NENE01971Z.txt    NENE02040Z.txt
+```         
+NENE01971Z.txt    NENE02040Z.txt
+```
 
 Sure enough, when she checks the log on her laptop, there's no depth recorded for either of those samples. Since it's too late to get the information any other way, she must exclude those two files from her analysis. She could just delete them using `rm`, but there are actually some analyses she might do later where depth doesn't matter, so instead, she'll just be careful later on to select files using the wildcard expression `*[AB].txt`. As always, the `*` matches any number of characters; the expression `[AB]` matches either an 'A' or a 'B', so this matches all the valid data files she has.
 
