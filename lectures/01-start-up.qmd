@@ -88,7 +88,7 @@ There will be times when files are two big to include in repositories (or even y
 
 # Computers
 
-To no surprise you will need to have some type of computer to do your analysis. This might seem trivial, but is not. In some instances you might you multiple machines. Generally speaking there are two primary consideration- RAM and CPUs (ie memory and power). Memory comes into play in running programs need to temporary store information like transcriptome assembly. Power is beneficial from programs that can use mulitple CPUs. For example if hardware has 48 cores, it could run a program faster than one with 4 cores. Note there are a lot of nuances here but it is good to have this vocabulary. Some of the work takes a long time (even on big machines) - meaning hours to weeks, thus hardware access needs consideration.
+To no surprise you will need to have some type of computer to do your analysis. This might seem trivial, but is not. In some instances you might you multiple machines. Generally speaking there are two primary consideration- RAM and CPUs (ie memory and power). Memory comes into play in running programs need to temporary store information like transcriptome assembly. Power is beneficial from programs that can use multiple CPUs. For example if hardware has 48 cores, it could run a program faster than one with 4 cores. Note there are a lot of nuances here but it is good to have this vocabulary. Some of the work takes a long time (even on big machines) - meaning hours to weeks, thus hardware access needs consideration.
 
 Some of the options you have are\
 - your personal laptop - duration limited?\
