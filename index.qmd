@@ -29,9 +29,9 @@ It is expected that you come to class, or to queries, having already reviewed ma
 
 ## Platforms
 
-JupyterHub[^1] Instance:
+JupyterHub[^1] Instance: <https://jupyter.rttl.uw.edu/2025-spring-fish-546-a/user-redirect/rstudio>
 
-[^1]: https://jupyter.rttl.uw.edu/2023-spring-fish-546-a/hub/admin
+[^1]: [https://jupyter.rttl.uw.edu/2023-spring-fish-546-a/hub/admin](https://jupyter.rttl.uw.edu/2025-spring-fish-546-a/hub/admin)
 
 Course[^2] GitHub Organization:
 
