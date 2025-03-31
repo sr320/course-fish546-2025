@@ -39,7 +39,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Date\nQuestions\nTopic\nAssignment\nProject Status\n\n\n\n\nlast week\n\nPreparing for class\nbash\n\n\n\nmar 27\nweek 01\nGetting Started\nNCBI Blast\nEstablish Repos\n\n\napr 03\nweek 02\nRNA-seq + Ariana Huffmyer\nDifferential Gene Expression\nExplore data, QC, add hashes\n\n\napr 10\nweek 03\nRStudio:knitr/ Fundamentals\nExplain and knit\nID endpoint in Readme. Start workflow.\n\n\napr 17\nweek 04\nRemote Computing\nHyak\nComplete sliced workflow (-&gt;endpoint)\n\n\napr 24\nweek 05\nQuatro\nPublishing Slides\nReadme w/ results (links), has plan for 4 weeks, issues resolved\n\n\nmay 01\nweek 06\nAlignment Data\nVariants and Visualize\nA weeks’ progress\n\n\nmay 08\nweek 07\nEpigenetics + Matt George\nAmnesty, Motifs, and IGV\nLaunch project report (rpubs), all sections noted\n\n\nmay 15\nweek 08\nGenomic Ranges\nBEDtools\nexample / mock ultimate figure\n\n\nmay 22\nweek 09\nArchiving\nBackup\nclear repo organization\n\n\nmay 29\nweek 10\nPresentations\nFinal Release\nCompendium"
+    "text": "Date\nQuestions\nTopic\nAssignment\nProject Status\n\n\n\n\nlast week\n\nPreparing for class\nbash\n\n\n\nmar 31\nweek 01\nGetting Started\nNCBI Blast\nEstablish Repos\n\n\napr 06\nweek 02\nRNA-seq + Ariana Huffmyer\nDifferential Gene Expression\nExplore data, QC, add hashes\n\n\napr 13\nweek 03\nRStudio:knitr/ Fundamentals\nExplain and knit\nID endpoint in Readme. Start workflow.\n\n\napr 20\nweek 04\nRemote Computing\nHyak\nComplete sliced workflow (-&gt;endpoint)\n\n\napr 27\nweek 05\nQuatro\nPublishing Slides\nReadme w/ results (links), has plan for 4 weeks, issues resolved\n\n\nmay 04\nweek 06\nAlignment Data\nVariants and Visualize\nA weeks’ progress\n\n\nmay 11\nweek 07\nEpigenetics + Matt George\nAmnesty, Motifs, and IGV\nLaunch project report (rpubs), all sections noted\n\n\nmay 18\nweek 08\nGenomic Ranges\nBEDtools\nexample / mock ultimate figure\n\n\nmay 25\nweek 09\nArchiving\nBackup\nclear repo organization\n\n\nmay 29\nweek 10\nPresentations\nFinal Release\nCompendium"
   },
   {
     "objectID": "lectures/09-project.html",
@@ -417,7 +417,7 @@
     "href": "index.html#footnotes",
     "title": "Bioinformatics for Environmental Sciences",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://jupyter.rttl.uw.edu/2023-spring-fish-546-a/hub/admin↩︎\nhttps://github.com/sr320/course-fish546-2023↩︎"
+    "text": "Footnotes\n\n\nhttps://jupyter.rttl.uw.edu/2023-spring-fish-546-a/hub/admin↩︎\nhttps://github.com/sr320/course-fish546-2025↩︎"
   },
   {
     "objectID": "lectures/00-before.html",
