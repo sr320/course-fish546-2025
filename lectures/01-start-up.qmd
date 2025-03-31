@@ -22,10 +22,9 @@ Setting Up and Managing a Bioinformatics Project 21-35;\
 
 As part of this class you will be learning fundamental skills in working with genomic data. In addition you will be carrying out an independent project throughout the quarter. Generally Tuesday will be learning a skillset and Thursday will be working on your independent project.
 
-Each student will have two GitHub repositories, one where you complete "classwork" and as one devoted to your project. Both need to be in the organization `course-fish546-2023`.
+Each student will have a GitHub repository in the organization `course-fish546-2025`.
 
 The name of these repos:\
-preferredname-*classwork* and\
 preferredname-projectdescriptor
 
 ::: callout-important
