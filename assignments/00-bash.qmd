@@ -12,6 +12,7 @@ format:
 
 ::: callout-warning
 For this self directed tutorial you will need to download [data-shell.zip](https://d.pr/f/BDaGTy) and navigate to using a terminal. This could be "Terminal" within Rstudio, or a stand alone application.
+Also available @ `http://gannet.fish.washington.edu/seashell/snaps/data-shell.zip`
 :::
 
 The part of the operating system responsible for managing files and directories is called the **file system**. It organizes our data into files, which hold information, and directories (also called "folders"), which hold files or other directories.

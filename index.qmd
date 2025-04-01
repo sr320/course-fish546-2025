@@ -21,10 +21,10 @@ While you likely have perceptions of glamour in considering this course, a major
 
 ## Format
 
-This class is driven in part by students needs and will be somewhat flexible in content. It is very practical in nature and problem driven. On Tuesdays (after you complete your question set I will go over concepts, best practices necessary to complete the week's assignment. This will also be a time where we provide solution to individual research project issues that are of general interest. Thursday will primarily be working sessions, a combination of the weeks coursework and making progress on your own research effort.
+This class is driven in part by students needs and will be somewhat flexible in content. It is very practical in nature and problem driven. On Tuesdays (after you complete your question set) I will go over concepts, best practices necessary to complete the week's assignment. This will also be a time where we provide solution to individual research project issues that are of general interest. Thursday will primarily be working sessions, a combination of the weeks coursework and making progress on your own research effort.
 
 ::: {.callout-important style="color: orange"}
-It is expected that you come to class, or to queries, having already reviewed material provided so we can spend time together addressing questions and troubleshooting technical issues.
+Our [GitHub Discussion board](https://github.com/orgs/course-fish546-2025/discussions) will be the primary means of communication. You will be expected to *ask questions*, answer questions, and provide feedback to your peers. This is a critical component of the course. Be sure you have a GitHub account, part of the course organization, and have notifications turned on.
 :::
 
 ## Platforms
@@ -41,9 +41,6 @@ Raven: <http://raven.fish.washington.edu:8787>
 
 Klone: `ssh klone.hyak.uw.edu`
 
-## Class Announcements
-
--   see GitHub issues (`knowledge-garden`)
 
 ------------------------------------------------------------------------
 

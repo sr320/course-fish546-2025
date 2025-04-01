@@ -11,6 +11,10 @@ format:
     code-overflow: wrap
 ---
 
+::: callout-note
+Note this schedule is remnant of last offering and is subject to change.
+:::
+
 | Date | Questions | Topic | Assignment | Project Status |
 |---------------|---------------|---------------|---------------|---------------|
 | last week |  | [Preparing for class](lectures/00-before.qmd) | [bash](assignments/00-bash.qmd) |  |
