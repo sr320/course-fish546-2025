@@ -41,6 +41,8 @@ Raven: <http://raven.fish.washington.edu:8787>
 
 Klone: `ssh klone.hyak.uw.edu`
 
+Zoom: https://washington.zoom.us/j/97438593750
+
 
 ------------------------------------------------------------------------
 
