@@ -11,17 +11,17 @@ format:
     code-overflow: wrap
 ---
 
-# Screen Recording
+## Screen Recording
 
-[![](http://gannet.fish.washington.edu/seashell/snaps/Monosnap_Recording_Information_-_Zoom_2025-04-01_19-12-07.png){fig-align="right"}](https://washington.zoom.us/rec/share/ApCFpllNk_t6yWP7sZICsF1FA4n71KQzfF-CpOLDddLKRz82Q-Mfg4a73KN8fVuM.hwaK3eWcoR0ZedLO)
+[![](http://gannet.fish.washington.edu/seashell/snaps/Monosnap_Recording_Information_-_Zoom_2025-04-01_19-12-07.png){fig-align="left"}](https://washington.zoom.us/rec/share/ApCFpllNk_t6yWP7sZICsF1FA4n71KQzfF-CpOLDddLKRz82Q-Mfg4a73KN8fVuM.hwaK3eWcoR0ZedLO)
 
-
-# Listen to this podcast episode
+## Podcast
 
 <audio controls>
-  <source src="http://gannet.fish.washington.edu/seashell/snaps/ElevenLabs_2025-04-02T03_03_40_Hope_-_upbeat_and_clear_pvc_sp100_s50_sb75_se0_b_m2.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+
+<source src="http://gannet.fish.washington.edu/seashell/snaps/ElevenLabs_2025-04-02T03_03_40_Hope_-_upbeat_and_clear_pvc_sp100_s50_sb75_se0_b_m2.mp3" type="audio/mpeg">
+
+------------------------------------------------------------------------
 
 # Text Reading
 
