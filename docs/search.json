@@ -242,7 +242,7 @@
     "href": "assignments/01-blast.html",
     "title": "NCBI Blast",
     "section": "",
-    "text": "For the first task you will take an unknown multi-fasta file and annotate it using blast. You are welcome to do this in terminal, Rstudio, or jupyter. My recommendation, and how I will demonstrate is using Rmarkdown. Once you have have your project structured, we will download software, databases, a fasta file and run the code.\nIn your code directory create a file.\n01-blast.Rmd"
+    "text": "For the first task you will take an unknown multi-fasta file and annotate it using blast. You are welcome to do this in terminal, Rstudio, or jupyter. My recommendation, and how I will demonstrate is using Rmarkdown. Once you have have your project structured, we will download software, databases, a fasta file and run the code.\n\n\n\n\n\n\nAssignment\n\n\n\nAnnotate a provided fasta file with GO slim terms. Your code should be fully reproducible.\n\n\nIn your code directory create a file.\n01-blast.Rmd\n\n\n\n\n\n\nTip\n\n\n\nRmarkdown is a good option as you can use markdown, add pictures and more!"
   },
   {
     "objectID": "assignments/01-blast.html#joining-blast-table-with-annotation-table",
@@ -544,5 +544,12 @@
     "title": "Getting Started",
     "section": "Podcast",
     "text": "Podcast"
+  },
+  {
+    "objectID": "assignments/01-blast.html#screen-recording",
+    "href": "assignments/01-blast.html#screen-recording",
+    "title": "NCBI Blast",
+    "section": "",
+    "text": "For the first task you will take an unknown multi-fasta file and annotate it using blast. You are welcome to do this in terminal, Rstudio, or jupyter. My recommendation, and how I will demonstrate is using Rmarkdown. Once you have have your project structured, we will download software, databases, a fasta file and run the code.\n\n\n\n\n\n\nAssignment\n\n\n\nAnnotate a provided fasta file with GO slim terms. Your code should be fully reproducible.\n\n\nIn your code directory create a file.\n01-blast.Rmd\n\n\n\n\n\n\nTip\n\n\n\nRmarkdown is a good option as you can use markdown, add pictures and more!"
   }
 ]

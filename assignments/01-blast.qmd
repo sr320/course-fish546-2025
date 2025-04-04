@@ -11,6 +11,12 @@ format:
     code-overflow: wrap
 ---
 
+## Screen Recording
+
+[![](http://gannet.fish.washington.edu/seashell/snaps/Monosnap_Recording_Information_-_Zoom_2025-04-01_19-12-07.png){fig-align="left"}](https://washington.zoom.us/rec/share/r2_bDwXOIWDMG7_1WDr5PErr2RrwAnV6U-WG3giCxGRT-kL6fq7574awH38F4nw.2ayImTAVVNW1Er7G?startTime=1743696993000)
+
+
+
 For the first task you will take an unknown multi-fasta file and annotate it using blast. You are welcome to do this in terminal, Rstudio, or jupyter. My recommendation, and how I will demonstrate is using Rmarkdown. Once you have have your project structured, we will download software, databases, a fasta file and run the code.
 
 ::: callout-important
