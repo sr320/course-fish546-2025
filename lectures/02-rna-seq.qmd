@@ -20,8 +20,6 @@ format:
 
 -   [Opportunities in Functional Genomics: A Primer on Lab and Computational Aspects](https://d.pr/f/ngmWkw)
 
--   [Fitting Multifactorial Models of Differential Expression](https://marineomics.github.io/FUN_01_DGE_comparison_v2.html)
-
 -   Textbook- Retrieving Bioinformatics Data 109-124
 
 # Objectives
