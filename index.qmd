@@ -43,6 +43,7 @@ Klone: `ssh klone.hyak.uw.edu`
 
 Zoom: <https://washington.zoom.us/j/97438593750>
 
+Hyak on Demand: [https://ondemand.hyak.uw.edu/pun/sys/dashboard/](https://ondemand.hyak.uw.edu/pun/sys/dashboard/)
 
 ------------------------------------------------------------------------
 
