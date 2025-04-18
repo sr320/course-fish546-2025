@@ -93,32 +93,4 @@ A job scheduler, also known as a workload manager or batch scheduler, is a softw
 
 Slurm (Simple Linux Utility for Resource Management) is an open-source, highly-scalable, and widely-used job scheduler designed for Linux-based HPC clusters. It facilitates the management of computational workloads by handling job submission, scheduling, dispatching, and monitoring tasks. Slurm is fault-tolerant, supporting the efficient execution of jobs across thousands of compute nodes.
 
-# Miscellany
-
-## Reciprocal BLAST
-
-A reciprocal BLAST (Basic Local Alignment Search Tool) analysis is a technique used to identify homologous genes or proteins between two species by performing a BLAST search in both directions. In other words, it involves searching for similarities between a query sequence from species A against a database of sequences from species B, and then searching for similarities between a query sequence from species B against a database of sequences from species A. This approach helps confirm orthology, which is useful in comparative genomics and evolutionary studies.
-
-Three insightful visualizations of reciprocal BLAST analysis results could be:
-
-1.  Circos Plot: A Circos plot is a circular layout that can display relationships between genomic sequences. In the context of reciprocal BLAST analysis, a Circos plot can effectively illustrate orthologous relationships between two species by connecting homologous genes or proteins with lines or curves. The strength of the connection (e.g., based on similarity scores or e-values) can be represented by the width or color of the lines, providing a comprehensive overview of the conservation between the two genomes.
-
-2.  Heatmap: A heatmap is a graphical representation of data where values are represented by colors. In a reciprocal BLAST analysis, a heatmap can be used to visualize the similarity scores or e-values between pairs of orthologous genes or proteins. The rows and columns of the heatmap would represent genes or proteins from species A and species B, respectively, with the color intensity representing the strength of the orthologous relationship. This allows for easy identification of strongly conserved regions or potential functional similarities between the two species.
-
-3.  Scatter Plot with Dot Matrix: A scatter plot with dot matrix can visualize the distribution of reciprocal best hits (RBH) based on similarity scores or e-values. The x-axis would represent the scores or e-values for species A against species B, and the y-axis would represent the scores or e-values for species B against species A. Each dot on the plot would represent a pair of orthologs, with its position determined by the score or e-value in both directions. This visualization allows users to identify potential outliers, observe the overall correlation between the two species, and assess the quality of the reciprocal BLAST analysis results.
-
-## Saving my PAT
-
--   see <https://happygitwithr.com/https-pat.html?q=password#store-pat>
-
-```         
-install.packages("gitcreds")
-```
-
-```         
-gitcreds::gitcreds_set()
-```
-
-## Chat GPT in Rstudio
-
-Video of [recent lab meeting](https://washington.zoom.us/rec/share/IVeKgydiIcAOoKVQRj5iG9w2Qu09MgHmvFfc0GiGQLsvoTXUnnUEa4mrS-OclBs.blleXMCwlIFi9aZG)
+# 

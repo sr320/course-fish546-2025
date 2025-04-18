@@ -13,7 +13,8 @@ format:
 
 # Screen Recording
 
-[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/yiOiI-lqgqBuEYI_kuym1VdtjFB_GXHqODPGZUbwSyxSCouYgctbhETxfiwzLfnE.6VNTpaI_tuPGGN91)
+[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/JUdOqmJagtdUwL6jgmQJnI-6BSQuJKfctJGH-v1t2glu33RrKkwPiOjjmwmlSQE9.EdPtGKDAgAieydV-)
+
 
 # Reading
 
@@ -89,14 +90,12 @@ Benefits of using the **`cache`** option:
 
 Here's an example of using the **`cache`** option in an R Markdown code chunk:
 
-````         
-```{{r expensive-operation, cache=TRUE}}
+```{{{r expensive-operation, cache=TRUE}}}
 # Simulate a time-consuming operation
 Sys.sleep(10)
 result <- rnorm(1000, mean=100, sd=15)
 summary(result)
 ```
-````
 
 In this example, the code chunk simulates a time-consuming operation by waiting for 10 seconds before generating random data. By setting **`cache=TRUE`**, the results of this code chunk are cached, so that they are not re-evaluated every time the document is knit. This can save time and ensure that the random data remains consistent between document versions.
 
@@ -108,6 +107,7 @@ Global chunk options are settings that apply to all code chunks in an R Markdown
 
 Here's an example of setting global chunk options:
 
+````         
 ``` {{r}}
 library(knitr)
 opts_chunk$set(
@@ -120,6 +120,7 @@ opts_chunk$set(
   fig.align = "center" # Align plots to the center
 )
 ```
+````
 
 # Tables and Images
 
@@ -140,6 +141,7 @@ This will create a table with two rows and three columns.
 
 2.  **R code**: You can create more complex tables using R packages like **`kable`** from the **`knitr`** package, or **`gt`** and **`flextable`**. Here's an example using **`kable`**:
 
+````         
 ``` {{r}}
 library(knitr)
 
@@ -151,6 +153,7 @@ data <- data.frame(
 
 kable(data, caption = "An example table")
 ```
+````
 
 This will generate a table with the specified data and caption.
 
@@ -166,15 +169,15 @@ Make sure to replace **`path/to/image.jpg`** with the actual file path or URL of
 
 2.  **R code**: You can also add images using R code, especially if you're generating images with R plots. Here's two examples:
 
+````         
 ``` {{r}}
 plot(cars, main = "An example plot", xlab = "Speed", ylab = "Distance")
 ```
+````
 
-````         
-```{{r schemat, echo = FALSE, out.width = “70%”, fig.align = “center”}}
+```{{{r schemat, echo = FALSE, out.width = “70%”, fig.align = “center”}}}
 knitr::include_graphics(“img/ncbi.png”)
 ```
-````
 
 The benefit of the this code as opposed to Mardown (above) is that you the ability to change size and align
 

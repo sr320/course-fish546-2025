@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -199,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Screen Recording</h1>
 <div class="quarto-figure quarto-figure-right">
 <figure class="figure">
-<p><a href="https://washington.zoom.us/rec/share/yiOiI-lqgqBuEYI_kuym1VdtjFB_GXHqODPGZUbwSyxSCouYgctbhETxfiwzLfnE.6VNTpaI_tuPGGN91"><img src="../img/zoom.png" class="img-fluid quarto-figure quarto-figure-right figure-img"></a></p>
+<p><a href="https://washington.zoom.us/rec/share/JUdOqmJagtdUwL6jgmQJnI-6BSQuJKfctJGH-v1t2glu33RrKkwPiOjjmwmlSQE9.EdPtGKDAgAieydV-"><img src="../img/zoom.png" class="img-fluid quarto-figure quarto-figure-right figure-img"></a></p>
 </figure>
 </div>
 </section>
@@ -258,12 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Resource management: Caching can help manage resources for large datasets or computationally intensive tasks that may otherwise cause the knitting process to fail or become unresponsive.</p></li>
 </ol>
 <p>Here’s an example of using the <strong><code>cache</code></strong> option in an R Markdown code chunk:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r expensive-operation, cache=TRUE}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in"># Simulate a time-consuming operation</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">Sys.sleep(10)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">result &lt;- rnorm(1000, mean=100, sd=15)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">summary(result)</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>{{r expensive-operation, cache=TRUE}} # Simulate a time-consuming operation Sys.sleep(10) result &lt;- rnorm(1000, mean=100, sd=15) summary(result)</code></p>
 <p>In this example, the code chunk simulates a time-consuming operation by waiting for 10 seconds before generating random data. By setting <strong><code>cache=TRUE</code></strong>, the results of this code chunk are cached, so that they are not re-evaluated every time the document is knit. This can save time and ensure that the random data remains consistent between document versions.</p>
 <p>Keep in mind that you should use the <strong><code>cache</code></strong> option carefully, as it may cause unexpected behavior if you’re caching results that depend on external resources or dynamic data. Always verify that your document produces the desired output when using the <strong><code>cache</code></strong> option.</p>
 </section>
@@ -272,18 +233,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Global Chunk Options</h1>
 <p>Global chunk options are settings that apply to all code chunks in an R Markdown document by default. You can set global options using the <strong><code>knitr::opts_chunk$set()</code></strong> function at the beginning of your R Markdown document, typically in an initial code chunk. By setting global options, you can maintain consistency across all code chunks and reduce the need to set options individually for each chunk.</p>
 <p>Here’s an example of setting global chunk options:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(knitr)</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">opts_chunk$set(</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">  echo = TRUE,         # Display code chunks</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">  eval = TRUE,         # Evaluate code chunks</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="in">  warning = FALSE,     # Hide warnings</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">  message = FALSE,     # Hide messages</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="in">  fig.width = 6,       # Set plot width in inches</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="in">  fig.height = 4,      # Set plot height in inches</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="in">  fig.align = "center" # Align plots to the center</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>``` {{r}}
+library(knitr)
+opts_chunk$set(
+  echo = TRUE,         # Display code chunks
+  eval = TRUE,         # Evaluate code chunks
+  warning = FALSE,     # Hide warnings
+  message = FALSE,     # Hide messages
+  fig.width = 6,       # Set plot width in inches
+  fig.height = 4,      # Set plot height in inches
+  fig.align = "center" # Align plots to the center
+)
+```</code></pre>
 </section>
 <section id="tables-and-images" class="level1">
 <h1>Tables and Images</h1>
@@ -301,17 +262,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="2" type="1">
 <li><strong>R code</strong>: You can create more complex tables using R packages like <strong><code>kable</code></strong> from the <strong><code>knitr</code></strong> package, or <strong><code>gt</code></strong> and <strong><code>flextable</code></strong>. Here’s an example using <strong><code>kable</code></strong>:</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(knitr)</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="in">data &lt;- data.frame(</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">  Column1 = c("A", "X"),</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="in">  Column2 = c("B", "Y"),</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="in">  Column3 = c("C", "Z")</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="in">kable(data, caption = "An example table")</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>``` {{r}}
+library(knitr)
+
+data &lt;- data.frame(
+  Column1 = c("A", "X"),
+  Column2 = c("B", "Y"),
+  Column3 = c("C", "Z")
+)
+
+kable(data, caption = "An example table")
+```</code></pre>
 <p>This will generate a table with the specified data and caption.</p>
 </section>
 <section id="adding-images" class="level2">
@@ -324,12 +285,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="2" type="1">
 <li><strong>R code</strong>: You can also add images using R code, especially if you’re generating images with R plots. Here’s two examples:</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars, main = "An example plot", xlab = "Speed", ylab = "Distance")</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r schemat, echo = FALSE, out.width = “70%”, fig.align = “center”}</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::include_graphics(“img/ncbi.png”)</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>``` {{r}}
+plot(cars, main = "An example plot", xlab = "Speed", ylab = "Distance")
+```</code></pre>
+<p><code>{{r schemat, echo = FALSE, out.width = “70%”, fig.align = “center”}} knitr::include_graphics(“img/ncbi.png”)</code></p>
 <p>The benefit of the this code as opposed to Mardown (above) is that you the ability to change size and align</p>
 </section>
 </section>
