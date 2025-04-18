@@ -19,7 +19,7 @@ format:
 
 -   Textbook: Working with Remote Machines.p 57-64
 
--   Lab Handbook - [Mox Guide](https://robertslab.github.io/resources/mox_Adding-a-User/) (including all subpages under Mox Guide)
+-   Lab Handbook - [Klone Guide](https://robertslab.github.io/resources/klone_quick-start/) (including all subpages under Klone Guide)
 
 # Objectives
 
