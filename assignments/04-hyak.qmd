@@ -18,7 +18,7 @@ format:
 ::: callout-important
 ## Assignment
 
-TLDR: log into hyak:klone using ssh , create a file. Use on-demand Rstudio, create file, push.
+TLDR: log into hyak:klone using ssh , create a file. Use on-demand Rstudio, edit file.
 :::
 
 # Logging in
@@ -51,7 +51,7 @@ TLDR: log into hyak:klone using ssh , create a file. Use on-demand Rstudio, crea
 
 -   Open a Rstudio session...
 
-![Launch](http://gannet.fish.washington.edu/seashell/snaps/Screen20Capture20on202025-04-2020at2018-23-22.gif)
+![Launch](http://gannet.fish.washington.edu/seashell/snaps/Screen20Capture20on202025-04-2020at2018-29-36.gif)
 
 ![](images/clipboard-1878340861.png)
 
