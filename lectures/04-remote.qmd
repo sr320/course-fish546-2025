@@ -19,6 +19,8 @@ format:
 
 -   Textbook: Working with Remote Machines.p 57-64
 
+-   <https://hyak.uw.edu/docs/>
+
 -   Lab Handbook - [Klone Guide](https://robertslab.github.io/resources/klone_quick-start/) (including all subpages under Klone Guide)
 
 # Objectives
