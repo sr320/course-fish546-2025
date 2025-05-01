@@ -32,4 +32,4 @@ Note this schedule is remnant of last offering and is subject to change.
 
 ------------------------------------------------------------------------
 
-<img src="https://img.shields.io/github/commit-activity/w/sr320/course-FISH546-2023" alt="GitHub commit activity"/>
+<img src="https://img.shields.io/github/commit-activity/w/sr320/course-FISH546-2025" alt="GitHub commit activity"/>

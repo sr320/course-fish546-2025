@@ -13,7 +13,7 @@ format:
 
 # Screen Recording
 
-[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/U0F0-YmBjwJyA-7GKQwi3Ilai3aU5bLcxSPseOVhYhH0Xq-8n7HiQvbYoHXy-Cn8.0Sjt_Lx8bzW4sJL8)
+[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/hQWIW2ymBziA01Q_Rzw0XQGhGmd6LzJTNxgAyA8sb_eki0XGvyrF0Qut4l5GQ0u1.C33busEcNswoG8eS?startTime=1746116955000)
 
 ::: callout-important
 ## Assignment
@@ -31,8 +31,7 @@ Looking at Alignment Files
 Reminder - these are big files, be sure to ignore on commit.
 :::
 
-````         
-```{{r, engine='bash'}}         
+```{{{r, engine='bash'}}}         
 cd ../data
 curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam
 curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam.bai
@@ -43,7 +42,6 @@ cd ../data
 curl -O https://gannet.fish.washington.edu/seashell/bu-mox/data/Cvirg-genome/GCF_002022765.2_C_virginica-3.0_genomic.fa
 curl -O https://gannet.fish.washington.edu/seashell/bu-mox/data/Cvirg-genome/GCF_002022765.2_C_virginica-3.0_genomic.fa.fai
 ```
-````
 
 ## Visualize with tview
 
@@ -83,8 +81,7 @@ curl -O https://gannet.fish.washington.edu/panopea/Cg-roslin/GCF_902806645.1_cgi
 
 ## Alignment
 
-````         
-```{{r, engine='bash'}}
+```{{{r, engine='bash'}}}
 /home/shared/hisat2-2.2.1/hisat2-build \
 -f ../data/cgigas_uk_roslin_v1_genomic-mito.fa \
 ../output/cgigas_uk_roslin_v1_genomic-mito.index
@@ -98,15 +95,12 @@ curl -O https://gannet.fish.washington.edu/panopea/Cg-roslin/GCF_902806645.1_cgi
 -2 ../data/F143n08_R2_001.fastq.gz \
 -S ../output/F143_cgigas.sam
 ```
-````
 
 Take a look
 
-````         
-```{{r, engine='bash'}}
+```{{{r, engine='bash'}}}
 tail -1 ../output/F143_cgigas.sam
 ```
-````
 
 ````         
 

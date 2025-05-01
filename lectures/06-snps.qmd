@@ -13,7 +13,7 @@ format:
 
 # Screen Recording
 
-[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/U0F0-YmBjwJyA-7GKQwi3Ilai3aU5bLcxSPseOVhYhH0Xq-8n7HiQvbYoHXy-Cn8.0Sjt_Lx8bzW4sJL8)
+[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/OEhsqgtF8NsJc7xTLYqDkjf3Gr8ojwCNRlSpo9kPfrrCVjOf1bXEaWlHnLj8nOY3.k4uFxTHlLZ6LD9_q)
 
 # Reading
 
@@ -80,7 +80,7 @@ read2   0       ref     7       60      8M      *       0       0       ATGCACTA
 
 The first two lines are the header section, containing metadata about the reference genome and the program used to generate the alignment. The following lines represent individual aligned reads in a tab-separated format.
 
-\-\--
+---
 
 # Samtools
 
