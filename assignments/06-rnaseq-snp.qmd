@@ -31,7 +31,7 @@ Looking at Alignment Files
 Reminder - these are big files, be sure to ignore on commit.
 :::
 
-```{{{r, engine='bash'}}}         
+```{{r, engine='bash'}}         
 cd ../data
 curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam
 curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam.bai
@@ -81,7 +81,7 @@ curl -O https://gannet.fish.washington.edu/panopea/Cg-roslin/GCF_902806645.1_cgi
 
 ## Alignment
 
-```{{{r, engine='bash'}}}
+```{{r, engine='bash'}}
 /home/shared/hisat2-2.2.1/hisat2-build \
 -f ../data/cgigas_uk_roslin_v1_genomic-mito.fa \
 ../output/cgigas_uk_roslin_v1_genomic-mito.index
@@ -98,7 +98,7 @@ curl -O https://gannet.fish.washington.edu/panopea/Cg-roslin/GCF_902806645.1_cgi
 
 Take a look
 
-```{{{r, engine='bash'}}}
+```{{r, engine='bash'}}
 tail -1 ../output/F143_cgigas.sam
 ```
 
