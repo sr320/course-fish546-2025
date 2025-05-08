@@ -231,7 +231,7 @@ Caution
 <p>Reminder - these are big files, be sure to ignore on commit.</p>
 </div>
 </div>
-<p><code>{{r, engine='bash'}}          cd ../data curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam.bai</code></p>
+<p><code>{r, engine='bash'}          cd ../data curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam.bai</code></p>
 <p><code>{r, engine='bash'}          cd ../data curl -O https://gannet.fish.washington.edu/seashell/bu-mox/data/Cvirg-genome/GCF_002022765.2_C_virginica-3.0_genomic.fa curl -O https://gannet.fish.washington.edu/seashell/bu-mox/data/Cvirg-genome/GCF_002022765.2_C_virginica-3.0_genomic.fa.fai</code></p>
 </section>
 <section id="visualize-with-tview" class="level2">
@@ -276,10 +276,10 @@ Important
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="alignment" class="level2">
 <h2 class="anchored" data-anchor-id="alignment">Alignment</h2>
-<p><code>{{r, engine='bash'}} /home/shared/hisat2-2.2.1/hisat2-build \ -f ../data/cgigas_uk_roslin_v1_genomic-mito.fa \ ../output/cgigas_uk_roslin_v1_genomic-mito.index</code></p>
+<p><code>{r, engine='bash'} /home/shared/hisat2-2.2.1/hisat2-build \ -f ../data/cgigas_uk_roslin_v1_genomic-mito.fa \ ../output/cgigas_uk_roslin_v1_genomic-mito.index</code></p>
 <p><code>{r, engine='bash'} /home/shared/hisat2-2.2.1/hisat2 \ -x ../output/cgigas_uk_roslin_v1_genomic-mito.index \ -p 4 \ -1 ../data/F143n08_R1_001.fastq.gz \ -2 ../data/F143n08_R2_001.fastq.gz \ -S ../output/F143_cgigas.sam</code></p>
 <p>Take a look</p>
-<p><code>{{r, engine='bash'}} tail -1 ../output/F143_cgigas.sam</code></p>
+<p><code>{r, engine='bash'} tail -1 ../output/F143_cgigas.sam</code></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, engine='bash'}</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="in"># Convert SAM to BAM, using 4 additional threads</span></span>
@@ -1005,7 +1005,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>Reminder - these are big files, be sure to ignore on commit.</span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{{r, engine='bash'}}         </span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, engine='bash'}         </span></span>
 <span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="in">cd ../data</span></span>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="in">curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam</span></span>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="in">curl -O https://gannet.fish.washington.edu/seashell/bu-mox/scrubbed/120321-cvBS/19F_R1_val_1_bismark_bt2_pe.deduplicated.sorted.bam.bai</span></span>
@@ -1055,7 +1055,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## Alignment</span></span>
 <span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{{r, engine='bash'}}</span></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, engine='bash'}</span></span>
 <span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="in">/home/shared/hisat2-2.2.1/hisat2-build \</span></span>
 <span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="in">-f ../data/cgigas_uk_roslin_v1_genomic-mito.fa \</span></span>
 <span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="in">../output/cgigas_uk_roslin_v1_genomic-mito.index</span></span>
@@ -1072,7 +1072,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>Take a look</span>
 <span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{{r, engine='bash'}}</span></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, engine='bash'}</span></span>
 <span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="in">tail -1 ../output/F143_cgigas.sam</span></span>
 <span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a></span>

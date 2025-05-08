@@ -13,7 +13,7 @@ format:
 
 # Screen Recording
 
-[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/NqcX7-bmS-eMtNCYmbSTN6mR0vF04SvCZm3FIfN6JgGnjdp4soWyFbfSrdYF1C5s.sbMom9iZkcsB2569)
+[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/play/pipaWZC-PI7A3qEOZVEWqeUhPl5IQafT9OuOwMYiGwzk4y17TGqwgAFZWYryu3ihgf_ofGM1UZK8naaL.c0T3vEknDZlgD6Zy?accessLevel=meeting&canPlayFromShare=true&from=my_recording&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fwashington.zoom.us%2Frec%2Fshare%2F-Qe32X1BizzLtTxFKF4epl1ghQWVLhIp8POTKK6f0Y-g03a2UXff30_JGmiHLEy8.qLy9utv_iBDJfFLs)
 
 # Reading
 
@@ -111,9 +111,9 @@ output:
 
 # Miscellany
 
-REvisit Week 01 
+REvisit Week 01
 
 Text Reading
 
-How to Learn Bioinformatics 1-18;      
+How to Learn Bioinformatics 1-18;\
 Setting Up and Managing a Bioinformatics Project 21-35;
