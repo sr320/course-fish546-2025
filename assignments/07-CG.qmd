@@ -14,12 +14,13 @@ format:
 ::: callout-important
 ## Assignment
 
-1)  Identify any prior assignments you would like regraded (this week only). 2) Visualize CG motifs in 10 of your sequences.
+1)  Identify any prior assignments you would like regraded (this week only).
+2)  Visualize CG motifs in 10 of your sequences.
 :::
 
 # Amnesty
 
-This week you can turn in all missing assignments to be assessed. Indicate your decision to do this and which specific assignments [here](https://github.com/course-fish546-2023/assistance-public/issues/15)
+This week you can turn in all missing assignments to be assessed. Indicate your decision to do this and which specific assignments [here](https://github.com/orgs/course-fish546-2025/discussions/46)
 
 # CG Motifs
 
