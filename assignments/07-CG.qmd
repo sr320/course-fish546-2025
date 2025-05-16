@@ -11,6 +11,10 @@ format:
     code-overflow: wrap
 ---
 
+[Zoom](https://urldefense.com/v3/__https://washington.zoom.us/rec/share/JNaZY3VVElGTX_difgg1b2_uLNxmZbMAsARxQNaoBvUQVpm9qP2GPRPT5tXrhwNp.qOd-bfN8DTWZmTKt__;!!K-Hz7m0Vt54!lmk2Vj2ZTkbi9j2Cd5khS34U9lbTtru6rlv5nQcdZTs8huqGAvpMTgnDYf-Ot8YUp522BX10y6_BaQ0j$)
+
+
+
 ::: callout-important
 ## Assignment
 
