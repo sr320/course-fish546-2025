@@ -10,9 +10,8 @@ format:
     code-overflow: wrap
 ---
 
-1. **What is your goal with respect to your research project to get accomplished this week?**
+1.  **What is your goal with respect to your research project to get accomplished this week?**
 
-2. **What is the overall status of your research repo? Is it will organized with a clear Readme file? Are file names and directory clear? Would your classmates be able to understand what the code in your files is designed to do?**
+2.  **What is the overall status of your research repo? Is it will organized with a clear Readme file? Are file names and directory clear? Would your classmates be able to understand what the code in your files is designed to do?**
 
-3. **Go to one of your classmates rpubs link (see issues). What are three things you think are neat? What are two things that are really not that clear to you?**
-
+3.  **Go to one of your classmates repo and/or [compendium link](https://github.com/orgs/course-fish546-2025/discussions/51). What are three things you think are neat? What are two things that are really not that clear to you?**

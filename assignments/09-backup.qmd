@@ -14,9 +14,7 @@ format:
 ::: callout-important
 ## Assignment
 
-Archive your research repo with Zenodo AND rsync to another computer.
+Archive your research repo with Zenodo
 :::
 
-This week you will use Zenodo to archive your repo. See [these instructions](https://sr320.github.io/course-fish546-2023/lectures/09-project.html). Add the DOI from zenondo to your rpubs website.
-
-We have used `rsync` in week 04. Use it this week to backup your entire directory on raven to another computer. In your code directory create a shell script named 00-rsync.sh with the rsync code used to backup your repo.
+This week you will use Zenodo to archive your repo. See [these instructions](https://sr320.github.io/course-fish546-2023/lectures/09-project.html). Add the DOI from zenondo to your readme / rpubs link for project.

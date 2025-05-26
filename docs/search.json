@@ -368,7 +368,7 @@
     "href": "assignments/09-backup.html",
     "title": "Backup",
     "section": "",
-    "text": "Assignment\n\n\n\nArchive your research repo with Zenodo AND rsync to another computer.\n\n\nThis week you will use Zenodo to archive your repo. See these instructions. Add the DOI from zenondo to your rpubs website.\nWe have used rsync in week 04. Use it this week to backup your entire directory on raven to another computer. In your code directory create a shell script named 00-rsync.sh with the rsync code used to backup your repo."
+    "text": "Assignment\n\n\n\nArchive your research repo with Zenodo\n\n\nThis week you will use Zenodo to archive your repo. See these instructions. Add the DOI from zenondo to your readme / rpubs link for project."
   },
   {
     "objectID": "assignments/06-rnaseq-snp.html",
@@ -473,7 +473,7 @@
     "href": "questions/week09.html",
     "title": "Week 09 Questions",
     "section": "",
-    "text": "What is your goal with respect to your research project to get accomplished this week?\nWhat is the overall status of your research repo? Is it will organized with a clear Readme file? Are file names and directory clear? Would your classmates be able to understand what the code in your files is designed to do?\nGo to one of your classmates rpubs link (see issues). What are three things you think are neat? What are two things that are really not that clear to you?"
+    "text": "What is your goal with respect to your research project to get accomplished this week?\nWhat is the overall status of your research repo? Is it will organized with a clear Readme file? Are file names and directory clear? Would your classmates be able to understand what the code in your files is designed to do?\nGo to one of your classmates repo and/or compendium link. What are three things you think are neat? What are two things that are really not that clear to you?"
   },
   {
     "objectID": "questions/week01.html",
