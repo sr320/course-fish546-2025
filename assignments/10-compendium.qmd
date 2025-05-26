@@ -16,5 +16,3 @@ format:
 
 Make new release of repo such that Zenodo archive will be updated with better version of your repo.
 :::
-
-
