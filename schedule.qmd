@@ -16,7 +16,7 @@ Note this schedule is remnant of last offering and is subject to change.
 :::
 
 | Date | Questions | Topic | Assignment | Project Status |
-|----|----|----|----|----|
+|---------------|---------------|---------------|---------------|---------------|
 | last week |  | [Preparing for class](lectures/00-before.qmd) | [bash](assignments/00-bash.qmd) |  |
 | mar 31 | [week 01](questions/week01.md) | [Getting Started](lectures/01-start-up.qmd) | [NCBI Blast](assignments/01-blast.qmd) | Establish Repos |
 | apr 06 | [week 02](questions/week02.qmd) | [RNA-seq](lectures/02-rna-seq.qmd) + Grace Crandall | [Differential Gene Expression](assignments/02-DGE.qmd) | Explore data, QC, add hashes |
@@ -27,7 +27,7 @@ Note this schedule is remnant of last offering and is subject to change.
 | may 11 | [week 07](questions/week07.qmd) | [Epigenetics](lectures/07-methylation.qmd) | [Amnesty, Motifs, and IGV](assignments/07-CG.qmd) | Launch project report ([rpubs)](https://github.com/orgs/course-fish546-2025/discussions/51), all sections noted |
 | may 18 | [week 08](questions/week08.qmd) | [Genomic Ranges](lectures/08-ranges.qmd) | [BEDtools](assignments/08-bedtools.qmd) | example / mock ultimate figure |
 | may 25 | [week 09](questions/week09.qmd) | [Archiving](lectures/09-project.qmd) | [Backup](assignments/09-backup.qmd) | clear repo organization |
-| jun 01 | [week 10](questions/week10.qmd) | [Presentations](lectures/10-lastmile.qmd) | [Final Release](assignments/10-compendium.qmd) | [Compendium](https://github.com/course-fish546-2023/assistance-public/issues/16) |
+| jun 01 | [week 10](questions/week10.qmd) | [Presentations](lectures/10-lastmile.qmd) | [Final Release](assignments/10-compendium.qmd) | [Compendium](https://github.com/orgs/course-fish546-2025/discussions/51) |
 |  |  |  |  |  |
 
 ------------------------------------------------------------------------
