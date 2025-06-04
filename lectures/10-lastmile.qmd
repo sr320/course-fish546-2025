@@ -13,7 +13,7 @@ format:
 
 # Screen Recording
 
-[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/HUVMjLsuWK3snAwP75XQuSbEi-rlEfEQCSSBGtvbJT0Y8a4xD1QnhcJX3ZUyNa3M.GcWa3lhsYuo7zdzB)
+[![](/img/zoom.png){fig-align="right"}](https://washington.zoom.us/rec/share/Hae1BZKzFdl6o7TBiyF42kIkUJMONLIp-hhsu2VzFC3YZRk-p_MUr7o3raIc3anB.31UzFe98AH2SW9Bx)
 
 # Objectives
 
